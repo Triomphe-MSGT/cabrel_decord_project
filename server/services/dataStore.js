@@ -1,7 +1,12 @@
 const Product = require('../models/Product');
 const Comment = require('../models/Comment');
+const HeroSlide = require('../models/HeroSlide');
+const FeaturedSection = require('../models/FeaturedSection');
 const jsonStore = require('./jsonStore');
 const { isJsonMode } = require('../config/db');
+
+const newId = (prefix) =>
+  `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 
 const getSort = (sort) => {
   switch (sort) {
@@ -49,8 +54,12 @@ const products = {
     const limit = Math.min(50, Number(query.limit) || 12);
     const skip = (page - 1) * limit;
     const filter = buildMongoFilter(query);
+    const sort =
+      query.enVedette === 'true' || query.enVedette === true
+        ? { ordreVedette: 1, createdAt: -1 }
+        : getSort(query.sort);
     const [items, total] = await Promise.all([
-      Product.find(filter).sort(getSort(query.sort)).skip(skip).limit(limit).lean(),
+      Product.find(filter).sort(sort).skip(skip).limit(limit).lean(),
       Product.countDocuments(filter),
     ]);
     return { products: items, total, page, pages: Math.ceil(total / limit) || 1 };
@@ -69,13 +78,15 @@ const products = {
 
   create: async (data) => {
     if (isJsonMode()) return jsonStore.createProduct(data);
-    const doc = await Product.create(data);
+    const { _id, createdAt, updatedAt, ...rest } = data;
+    const doc = await Product.create({ ...rest, _id: _id || newId('prod') });
     return doc.toObject();
   },
 
   update: async (id, data) => {
     if (isJsonMode()) return jsonStore.updateProduct(id, data);
-    return Product.findByIdAndUpdate(id, data, { new: true, runValidators: true }).lean();
+    const { _id, createdAt, updatedAt, ...rest } = data;
+    return Product.findByIdAndUpdate(id, rest, { new: true, runValidators: true }).lean();
   },
 
   remove: async (id) => {
@@ -129,4 +140,111 @@ const comments = {
   },
 };
 
-module.exports = { products, comments };
+const heroSlides = {
+  findPublic: async () => {
+    if (isJsonMode()) return jsonStore.findHeroSlides(true);
+    return HeroSlide.find({ actif: true }).sort({ ordre: 1, createdAt: 1 }).lean();
+  },
+
+  findAll: async () => {
+    if (isJsonMode()) return jsonStore.findHeroSlides(false);
+    return HeroSlide.find().sort({ ordre: 1, createdAt: 1 }).lean();
+  },
+
+  findById: async (id) => {
+    if (isJsonMode()) return jsonStore.findHeroSlideById(id);
+    return HeroSlide.findById(id).lean();
+  },
+
+  create: async (data) => {
+    if (isJsonMode()) return jsonStore.createHeroSlide(data);
+    const { _id, createdAt, updatedAt, ...rest } = data;
+    const doc = await HeroSlide.create({ ...rest, _id: _id || newId('hero') });
+    return doc.toObject();
+  },
+
+  update: async (id, data) => {
+    if (isJsonMode()) return jsonStore.updateHeroSlide(id, data);
+    const { _id, createdAt, updatedAt, ...rest } = data;
+    return HeroSlide.findByIdAndUpdate(id, rest, { new: true, runValidators: true }).lean();
+  },
+
+  remove: async (id) => {
+    if (isJsonMode()) return jsonStore.deleteHeroSlide(id);
+    return HeroSlide.findByIdAndDelete(id).lean();
+  },
+};
+
+const featured = {
+  getPublic: async () => {
+    if (isJsonMode()) {
+      const section = jsonStore.getFeaturedSection();
+      if (section.actif === false) return { section, products: [] };
+      return { section, products: jsonStore.findFeaturedProducts() };
+    }
+    const sectionDoc = await FeaturedSection.findOne().lean();
+    const section = sectionDoc || {
+      kicker: 'Sélection du moment',
+      title: 'À la une',
+      subtitle: 'Passez le curseur sur un produit pour découvrir une autre vue ou sa mise en scène.',
+      maxItems: 6,
+      actif: true,
+      ctaLabel: 'Explorer le catalogue',
+      ctaLink: '/mobilier',
+    };
+    if (section.actif === false) return { section, products: [] };
+    const max = Math.min(12, Number(section.maxItems) || 6);
+    const products = await Product.find({ enVedette: true })
+      .sort({ ordreVedette: 1, createdAt: -1 })
+      .limit(max)
+      .lean();
+    return { section, products };
+  },
+
+  getAdmin: async () => {
+    if (isJsonMode()) {
+      return {
+        section: jsonStore.getFeaturedSection(),
+        featured: jsonStore.findFeaturedProducts(),
+        all: jsonStore.findAllProducts({}),
+      };
+    }
+    const sectionDoc = await FeaturedSection.findOne().lean();
+    const section = sectionDoc || {
+      kicker: 'Sélection du moment',
+      title: 'À la une',
+      subtitle: '',
+      maxItems: 6,
+      actif: true,
+      ctaLabel: 'Explorer le catalogue',
+      ctaLink: '/mobilier',
+    };
+    const [featuredProducts, all] = await Promise.all([
+      Product.find({ enVedette: true }).sort({ ordreVedette: 1 }).lean(),
+      Product.find().sort({ createdAt: -1 }).lean(),
+    ]);
+    return { section, featured: featuredProducts, all };
+  },
+
+  updateSection: async (data) => {
+    if (isJsonMode()) return jsonStore.updateFeaturedSection(data);
+    const updated = await FeaturedSection.findOneAndUpdate({}, data, {
+      new: true,
+      upsert: true,
+      runValidators: true,
+    }).lean();
+    return updated;
+  },
+
+  updateProducts: async (items) => {
+    if (isJsonMode()) return jsonStore.updateFeaturedProducts(items);
+    await Promise.all(
+      items.map(({ _id, enVedette, ordreVedette }) =>
+        Product.findByIdAndUpdate(_id, { enVedette, ordreVedette }, { new: true })
+      )
+    );
+    return Product.find({ enVedette: true }).sort({ ordreVedette: 1 }).lean();
+  },
+};
+
+module.exports = { products, comments, heroSlides, featured };

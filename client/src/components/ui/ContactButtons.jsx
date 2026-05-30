@@ -1,14 +1,16 @@
 import { MessageCircle, Mail, Facebook } from 'lucide-react';
 import { getWhatsAppLink, getGmailLink, getFacebookLink } from '../../utils/contactLinks';
+import { useContactSettings } from '../../context/ContactSettingsContext';
 
 export default function ContactButtons({ produit }) {
+  const { contact } = useContactSettings();
   if (!produit) return null;
 
   const links = [
-    { href: getWhatsAppLink(produit), label: 'WhatsApp', icon: MessageCircle, color: 'bg-green-600' },
-    { href: getGmailLink(produit), label: 'Gmail', icon: Mail, color: 'bg-red-600' },
-    { href: getFacebookLink(produit), label: 'Facebook', icon: Facebook, color: 'bg-blue-600' },
-  ];
+    { href: getWhatsAppLink(produit, contact), label: 'WhatsApp', icon: MessageCircle, color: 'bg-green-600' },
+    { href: getGmailLink(produit, contact), label: 'Gmail', icon: Mail, color: 'bg-red-600' },
+    { href: getFacebookLink(contact), label: 'Facebook', icon: Facebook, color: 'bg-blue-600' },
+  ].filter((l) => l.href);
 
   return (
     <div className="flex flex-wrap gap-3">

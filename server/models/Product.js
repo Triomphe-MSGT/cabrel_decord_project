@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema(
   {
+    _id: { type: String, required: true },
     titre: { type: String, required: true, trim: true },
     description: { type: String, required: true },
     atelier: { type: String, enum: ['mobilier', 'art'], required: true },
@@ -21,6 +22,7 @@ const productSchema = new mongoose.Schema(
     images: [String],
     tags: [String],
     enVedette: { type: Boolean, default: false },
+    ordreVedette: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

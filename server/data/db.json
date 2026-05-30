@@ -11,10 +11,12 @@
       "disponible": true,
       "images": [
         "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
-        "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80"
+        "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80",
+        "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80"
       ],
       "tags": ["teck", "salle à manger", "artisanal"],
       "enVedette": true,
+      "ordreVedette": 1,
       "createdAt": "2026-05-01T10:00:00.000Z",
       "updatedAt": "2026-05-01T10:00:00.000Z"
     },
@@ -28,10 +30,12 @@
       "prix": 95000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80"
+        "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80",
+        "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80"
       ],
       "tags": ["chaise", "iroko"],
       "enVedette": true,
+      "ordreVedette": 2,
       "createdAt": "2026-05-02T10:00:00.000Z",
       "updatedAt": "2026-05-02T10:00:00.000Z"
     },
@@ -45,7 +49,8 @@
       "prix": 720000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80"
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80"
       ],
       "tags": ["armoire", "rangement"],
       "enVedette": false,
@@ -79,10 +84,13 @@
       "prix": 390000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80",
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
       ],
       "tags": ["canapé", "rotin", "extérieur"],
       "enVedette": true,
+      "ordreVedette": 3,
       "createdAt": "2026-05-05T10:00:00.000Z",
       "updatedAt": "2026-05-05T10:00:00.000Z"
     },
@@ -96,7 +104,8 @@
       "prix": 125000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80"
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80",
+        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80"
       ],
       "tags": ["étagère", "murale"],
       "enVedette": false,
@@ -114,10 +123,12 @@
       "prix": 280000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80"
+        "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
       ],
       "tags": ["abstrait", "sahel"],
       "enVedette": true,
+      "ordreVedette": 4,
       "createdAt": "2026-05-07T10:00:00.000Z",
       "updatedAt": "2026-05-07T10:00:00.000Z"
     },
@@ -132,10 +143,12 @@
       "prix": 350000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1579783902610-fdc54b4f8687?w=800&q=80"
+        "https://images.unsplash.com/photo-1579783902610-fdc54b4f8687?w=800&q=80",
+        "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80"
       ],
       "tags": ["portrait", "figuratif"],
       "enVedette": true,
+      "ordreVedette": 5,
       "createdAt": "2026-05-08T10:00:00.000Z",
       "updatedAt": "2026-05-08T10:00:00.000Z"
     },
@@ -150,7 +163,8 @@
       "prix": 220000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1578301978018-3005759f48ae?w=800&q=80"
+        "https://images.unsplash.com/photo-1578301978018-3005759f48ae?w=800&q=80",
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
       ],
       "tags": ["paysage", "nature"],
       "enVedette": false,
@@ -168,10 +182,12 @@
       "prix": 420000,
       "disponible": true,
       "images": [
-        "https://images.unsplash.com/photo-1549490349-8643362247b1?w=800&q=80"
+        "https://images.unsplash.com/photo-1549490349-8643362247b1?w=800&q=80",
+        "https://images.unsplash.com/photo-1616136237343-2c67f44fc72?w=800&q=80"
       ],
       "tags": ["symbolique", "afrique"],
       "enVedette": true,
+      "ordreVedette": 6,
       "createdAt": "2026-05-10T10:00:00.000Z",
       "updatedAt": "2026-05-10T10:00:00.000Z"
     },
@@ -212,6 +228,16 @@
       "updatedAt": "2026-05-12T10:00:00.000Z"
     }
   ],
+  "featuredSection": {
+    "kicker": "Sélection du moment",
+    "title": "À la une",
+    "subtitle": "Nos coups de cœur — survolez une image pour découvrir le produit en situation.",
+    "maxItems": 6,
+    "actif": true,
+    "ctaLabel": "Explorer le catalogue",
+    "ctaLink": "/mobilier",
+    "updatedAt": "2026-05-01T10:00:00.000Z"
+  },
   "comments": [
     {
       "_id": "comm_001",
@@ -272,5 +298,71 @@
       "createdAt": "2026-05-29T10:20:00.000Z",
       "updatedAt": "2026-05-29T10:20:00.000Z"
     }
-  ]
+  ],
+  "heroSlides": [
+    {
+      "_id": "hero_001",
+      "mainImage": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80",
+      "insetImage": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80",
+      "kicker": "Atelier Mobilier",
+      "title": "Mobilier",
+      "name": "Artisanat & bois noble",
+      "description": "Tables, chaises et pièces sur mesure, façonnées à la main dans nos ateliers.",
+      "badge": "Fabrication artisanale",
+      "ctaLabel": "Découvrir",
+      "ctaLink": "/mobilier",
+      "ordre": 1,
+      "actif": true,
+      "createdAt": "2026-05-01T10:00:00.000Z",
+      "updatedAt": "2026-05-01T10:00:00.000Z"
+    },
+    {
+      "_id": "hero_002",
+      "mainImage": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80",
+      "insetImage": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&q=80",
+      "kicker": "Atelier Art",
+      "title": "Art décoratif",
+      "name": "Œuvres originales",
+      "description": "Tableaux et peintures pour sublimer vos murs avec authenticité.",
+      "badge": "Créations uniques",
+      "ctaLabel": "Explorer",
+      "ctaLink": "/art",
+      "ordre": 2,
+      "actif": true,
+      "createdAt": "2026-05-01T10:00:00.000Z",
+      "updatedAt": "2026-05-01T10:00:00.000Z"
+    },
+    {
+      "_id": "hero_003",
+      "mainImage": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80",
+      "insetImage": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80",
+      "kicker": "Cabrel Décor",
+      "title": "Nos univers",
+      "name": "Mobilier & art",
+      "description": "Deux ateliers réunis pour habiller chaque intérieur avec élégance.",
+      "badge": "Sur mesure",
+      "ctaLabel": "Voir le catalogue",
+      "ctaLink": "/mobilier",
+      "ordre": 3,
+      "actif": true,
+      "createdAt": "2026-05-01T10:00:00.000Z",
+      "updatedAt": "2026-05-01T10:00:00.000Z"
+    }
+  ],
+  "admin": {
+    "_id": "admin_001",
+    "nom": "Administrateur Cabrel",
+    "email": "admin@cabreldecor.com",
+    "passwordHash": "$2b$10$Ul8NLFoftOEOyq3wg5cTnOaxXUUIDzG5xhxyXps6ZxRAymm7WDJjO",
+    "createdAt": "2026-05-01T10:00:00.000Z",
+    "updatedAt": "2026-05-01T10:00:00.000Z"
+  },
+  "contact": {
+    "whatsapp": "237670423949",
+    "email": "contact@cabreldecor.com",
+    "facebook": "cabreldecor",
+    "adresse": "Yaoundé, Cameroun",
+    "horaires": "Lun – Sam · 9h – 18h",
+    "updatedAt": "2026-05-01T10:00:00.000Z"
+  }
 }

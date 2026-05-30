@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { commentsApi } from '../../services/api';
+import AdminShell from '../../components/admin/AdminShell';
 import PageTransition from '../../components/layout/PageTransition';
 
 export default function AdminComments() {
@@ -27,11 +27,7 @@ export default function AdminComments() {
 
   return (
     <PageTransition>
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <Link to="/admin/dashboard" className="text-sm text-cabrel-wood hover:underline mb-4 inline-block">
-          ← Dashboard
-        </Link>
-        <h1 className="font-serif text-3xl mb-8">Commentaires en attente</h1>
+      <AdminShell title="Commentaires" description="Validez ou rejetez les avis clients en attente.">
 
         {comments.length === 0 && (
           <p className="opacity-60">Aucun commentaire en attente.</p>
@@ -64,7 +60,7 @@ export default function AdminComments() {
             </li>
           ))}
         </ul>
-      </div>
+      </AdminShell>
     </PageTransition>
   );
 }

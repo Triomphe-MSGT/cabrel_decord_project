@@ -6,7 +6,9 @@ import PageTransition from '../components/layout/PageTransition';
 export default function Home() {
   return (
     <PageTransition>
-      <Hero />
+      <div className="hero-lead">
+        <Hero />
+      </div>
       <AtelierPreview />
       <FeaturedItems />
     </PageTransition>

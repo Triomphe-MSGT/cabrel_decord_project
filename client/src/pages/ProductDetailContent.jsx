@@ -48,7 +48,7 @@ export default function ProductDetailContent({ id, atelier }) {
           ← Retour
         </Link>
         <div className="grid lg:grid-cols-2 gap-10">
-          <ImageGallery images={product.images} />
+            <ImageGallery images={product.images} title={product.titre} />
           <div>
             <p className="text-sm uppercase text-cabrel-wood">{categorie}</p>
             <h1 className="font-serif text-3xl mt-1">{product.titre}</h1>

@@ -1,61 +1,84 @@
+import { RotateCcw } from 'lucide-react';
+import { ATELIER_CONFIG } from '../../config/ateliers';
 import PriceRange from './PriceRange';
 
-const MOBILIER_CATEGORIES = ['table', 'chaise', 'armoire', 'lit', 'canapé', 'étagère', 'autre'];
-const ART_CATEGORIES = ['tableau', 'peinture abstraite', 'portrait', 'paysage', 'autre'];
-
-export default function FilterPanel({ atelier, filters, setFilter }) {
-  const categories = atelier === 'art' ? ART_CATEGORIES : MOBILIER_CATEGORIES;
+export default function FilterPanel({
+  atelier,
+  filters,
+  setFilter,
+  resetFilters,
+  activeFilterCount = 0,
+  onApply,
+}) {
+  const { categories } = ATELIER_CONFIG[atelier];
 
   return (
-    <aside className="bg-white rounded-xl p-4 border border-cabrel-wood/10 space-y-4">
-      <h3 className="font-semibold">Filtres</h3>
-
-      <div>
-        <label className="text-sm font-medium block mb-1">Catégorie</label>
-        <select
-          value={filters.categorie}
-          onChange={(e) => setFilter('categorie', e.target.value)}
-          className="w-full border border-cabrel-wood/30 rounded-lg px-3 py-2 text-sm"
-        >
-          <option value="">Toutes</option>
+    <div className="filter-panel">
+      <div className="filter-panel__section">
+        <p className="filter-panel__label">Catégorie</p>
+        <div className="filter-panel__pills">
+          <button
+            type="button"
+            className={`filter-panel__pill${!filters.categorie ? ' filter-panel__pill--active' : ''}`}
+            onClick={() => setFilter('categorie', '')}
+          >
+            Toutes
+          </button>
           {categories.map((c) => (
-            <option key={c} value={c}>{c}</option>
+            <button
+              key={c}
+              type="button"
+              className={`filter-panel__pill${filters.categorie === c ? ' filter-panel__pill--active' : ''}`}
+              onClick={() => setFilter('categorie', c)}
+            >
+              {c.charAt(0).toUpperCase() + c.slice(1)}
+            </button>
           ))}
-        </select>
+        </div>
       </div>
 
-      <PriceRange
-        prixMin={filters.prixMin}
-        prixMax={filters.prixMax}
-        onChangeMin={(v) => setFilter('prixMin', v)}
-        onChangeMax={(v) => setFilter('prixMax', v)}
-      />
-
-      <div>
-        <label className="text-sm font-medium block mb-1">Disponibilité</label>
-        <select
-          value={filters.disponible}
-          onChange={(e) => setFilter('disponible', e.target.value)}
-          className="w-full border border-cabrel-wood/30 rounded-lg px-3 py-2 text-sm"
-        >
-          <option value="">Tous</option>
-          <option value="true">Disponible</option>
-          <option value="false">Indisponible</option>
-        </select>
+      <div className="filter-panel__section">
+        <PriceRange
+          prixMin={filters.prixMin}
+          prixMax={filters.prixMax}
+          onChangeMin={(v) => setFilter('prixMin', v)}
+          onChangeMax={(v) => setFilter('prixMax', v)}
+        />
       </div>
 
-      <div>
-        <label className="text-sm font-medium block mb-1">Tri</label>
-        <select
-          value={filters.sort}
-          onChange={(e) => setFilter('sort', e.target.value)}
-          className="w-full border border-cabrel-wood/30 rounded-lg px-3 py-2 text-sm"
-        >
-          <option value="recent">Plus récent</option>
-          <option value="prix_asc">Prix croissant</option>
-          <option value="prix_desc">Prix décroissant</option>
-        </select>
+      <div className="filter-panel__section">
+        <p className="filter-panel__label">Disponibilité</p>
+        <div className="filter-panel__pills">
+          {[
+            { value: '', label: 'Tous' },
+            { value: 'true', label: 'Disponible' },
+            { value: 'false', label: 'Indisponible' },
+          ].map(({ value, label }) => (
+            <button
+              key={value || 'all'}
+              type="button"
+              className={`filter-panel__pill${filters.disponible === value ? ' filter-panel__pill--active' : ''}`}
+              onClick={() => setFilter('disponible', value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
-    </aside>
+
+      <div className="filter-panel__footer">
+        {activeFilterCount > 0 && (
+          <button type="button" className="filter-panel__reset" onClick={resetFilters}>
+            <RotateCcw size={15} />
+            Réinitialiser
+          </button>
+        )}
+        {onApply && (
+          <button type="button" className="filter-panel__apply lg:hidden" onClick={onApply}>
+            Voir les résultats
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

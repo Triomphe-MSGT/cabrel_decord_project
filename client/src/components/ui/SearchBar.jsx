@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 
-export default function SearchBar({ defaultValue = '', className = '' }) {
+export default function SearchBar({ defaultValue = '', className = '', compact = false }) {
   const [q, setQ] = useState(defaultValue);
   const navigate = useNavigate();
 
@@ -12,6 +12,21 @@ export default function SearchBar({ defaultValue = '', className = '' }) {
       navigate(`/recherche?q=${encodeURIComponent(q.trim())}`);
     }
   };
+
+  if (compact) {
+    return (
+      <form onSubmit={handleSubmit} className={`navbar-search ${className}`}>
+        <Search size={16} className="navbar-search-icon" strokeWidth={1.75} />
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Rechercher mobilier, art..."
+          className="navbar-search-input"
+        />
+      </form>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className={`flex gap-2 ${className}`}>
