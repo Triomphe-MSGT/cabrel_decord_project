@@ -43,16 +43,18 @@ export default function ProductDetailContent({ id, atelier }) {
 
   return (
     <PageTransition>
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <Link to={listPath} className="text-sm text-cabrel-wood hover:underline mb-6 inline-block">
+      <div className="product-detail max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-10">
+        <Link to={listPath} className="text-sm text-cabrel-wood hover:underline mb-4 sm:mb-6 inline-block">
           ← Retour
         </Link>
-        <div className="grid lg:grid-cols-2 gap-10">
-            <ImageGallery images={product.images} title={product.titre} />
-          <div>
-            <p className="text-sm uppercase text-cabrel-wood">{categorie}</p>
-            <h1 className="font-serif text-3xl mt-1">{product.titre}</h1>
-            <p className="text-2xl text-cabrel-wood font-semibold mt-4">
+        <div className="product-detail__layout">
+          <ImageGallery images={product.images} title={product.titre} />
+          <div className="product-detail__info">
+            <p className="text-xs sm:text-sm uppercase text-cabrel-wood">{categorie}</p>
+            <h1 className="font-serif text-xl sm:text-2xl lg:text-3xl mt-1 leading-tight break-words">
+              {product.titre}
+            </h1>
+            <p className="text-lg sm:text-xl lg:text-2xl text-cabrel-wood font-semibold mt-3 sm:mt-4">
               {formatPrice(product.prix)}
             </p>
             <p className="mt-2 text-sm">
@@ -62,18 +64,30 @@ export default function ProductDetailContent({ id, atelier }) {
                 <span className="text-red-600">Indisponible</span>
               )}
             </p>
-            <p className="mt-6 text-cabrel-dark/80 leading-relaxed">{product.description}</p>
-            {product.matiere && <p className="mt-2"><strong>Matière :</strong> {product.matiere}</p>}
-            {product.technique && <p className="mt-2"><strong>Technique :</strong> {product.technique}</p>}
-            {product.dimensions && <p className="mt-2"><strong>Dimensions :</strong> {product.dimensions}</p>}
-            <div className="mt-8">
-              <h2 className="font-semibold mb-3">Nous contacter</h2>
+            <p className="product-detail__description">{product.description}</p>
+            {product.matiere && (
+              <p className="mt-2 text-sm break-words">
+                <strong>Matière :</strong> {product.matiere}
+              </p>
+            )}
+            {product.technique && (
+              <p className="mt-2 text-sm break-words">
+                <strong>Technique :</strong> {product.technique}
+              </p>
+            )}
+            {product.dimensions && (
+              <p className="mt-2 text-sm break-words">
+                <strong>Dimensions :</strong> {product.dimensions}
+              </p>
+            )}
+            <div className="mt-6 sm:mt-8">
+              <h2 className="font-semibold mb-3 text-base sm:text-lg">Nous contacter</h2>
               <ContactButtons produit={product} />
             </div>
           </div>
         </div>
 
-        <section className="mt-16 max-w-2xl">
+        <section className="mt-10 sm:mt-16 max-w-2xl">
           <h2 className="font-serif text-xl mb-6">Commentaires</h2>
           <CommentList comments={comments} loading={commentsLoading} />
           <div className="mt-8">

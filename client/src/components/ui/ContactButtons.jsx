@@ -13,14 +13,14 @@ export default function ContactButtons({ produit }) {
   ].filter((l) => l.href);
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="contact-buttons">
       {links.map(({ href, label, icon: Icon, color }) => (
         <a
           key={label}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm ${color} hover:opacity-90 transition-opacity`}
+          className={`contact-buttons__btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-white text-sm ${color} hover:opacity-90 transition-opacity`}
         >
           <Icon size={18} />
           {label}

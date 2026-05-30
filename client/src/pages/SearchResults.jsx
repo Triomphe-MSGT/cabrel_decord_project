@@ -47,7 +47,7 @@ export default function SearchResults() {
           </p>
         )}
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {results.map((p) => (
             <div key={p._id}>
               <span className="text-xs uppercase text-cabrel-wood mb-1 block">

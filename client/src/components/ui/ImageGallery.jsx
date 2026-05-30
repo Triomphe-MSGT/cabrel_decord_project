@@ -22,25 +22,32 @@ export default function ImageGallery({ images = [], title = '' }) {
 
   return (
     <div className="product-gallery">
-      <Swiper
-        modules={[Navigation, Pagination, Thumbs]}
-        navigation
-        pagination={{ clickable: true }}
-        thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-        onSlideChange={(s) => setActiveIndex(s.activeIndex)}
-        className="product-gallery__main"
-      >
-        {images.map((src, i) => (
-          <SwiperSlide key={src}>
-            <div className="product-gallery__slide">
-              <img src={resolveMediaUrl(src)} alt={title ? `${title} — vue ${i + 1}` : ''} />
-              <span className="product-gallery__counter">
-                {i + 1} / {images.length}
-              </span>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="product-gallery__frame">
+        <Swiper
+          modules={[Navigation, Pagination, Thumbs]}
+          navigation
+          pagination={{ clickable: true }}
+          thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+          onSlideChange={(s) => setActiveIndex(s.activeIndex)}
+          className="product-gallery__main"
+          spaceBetween={0}
+        >
+          {images.map((src, i) => (
+            <SwiperSlide key={`${src}-${i}`}>
+              <div className="product-gallery__slide">
+                <img
+                  src={resolveMediaUrl(src)}
+                  alt={title ? `${title} — vue ${i + 1}` : ''}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+                <span className="product-gallery__counter">
+                  {i + 1} / {images.length}
+                </span>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
       {images.length > 1 && (
         <>
@@ -55,16 +62,17 @@ export default function ImageGallery({ images = [], title = '' }) {
             modules={[Thumbs]}
             onSwiper={setThumbsSwiper}
             spaceBetween={8}
-            slidesPerView={4}
+            slidesPerView={3.5}
             watchSlidesProgress
             className="product-gallery__thumbs"
             breakpoints={{
+              480: { slidesPerView: 4 },
               640: { slidesPerView: 5 },
             }}
           >
             {images.map((src, i) => (
-              <SwiperSlide key={`thumb-${src}`} className="product-gallery__thumb">
-                <img src={resolveMediaUrl(src)} alt="" />
+              <SwiperSlide key={`thumb-${src}-${i}`} className="product-gallery__thumb">
+                <img src={resolveMediaUrl(src)} alt="" loading="lazy" />
               </SwiperSlide>
             ))}
           </Swiper>
