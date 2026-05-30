@@ -1,0 +1,276 @@
+{
+  "products": [
+    {
+      "_id": "prod_mob_001",
+      "titre": "Table à manger en teck",
+      "description": "Table artisanale en teck massif, finition huilée naturelle. Pièce centrale pour une salle à manger chaleureuse, fabriquée dans notre atelier mobilier.",
+      "atelier": "mobilier",
+      "categorie_mobilier": "table",
+      "matiere": "Teck massif",
+      "prix": 485000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
+        "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80"
+      ],
+      "tags": ["teck", "salle à manger", "artisanal"],
+      "enVedette": true,
+      "createdAt": "2026-05-01T10:00:00.000Z",
+      "updatedAt": "2026-05-01T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_mob_002",
+      "titre": "Chaise sculptée Iroko",
+      "description": "Chaise au design épuré, dossier légèrement incurvé pour un confort optimal. Bois iroko local, assemblage traditionnel.",
+      "atelier": "mobilier",
+      "categorie_mobilier": "chaise",
+      "matiere": "Iroko",
+      "prix": 95000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80"
+      ],
+      "tags": ["chaise", "iroko"],
+      "enVedette": true,
+      "createdAt": "2026-05-02T10:00:00.000Z",
+      "updatedAt": "2026-05-02T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_mob_003",
+      "titre": "Armoire deux portes Wengé",
+      "description": "Grande armoire de rangement en wengé, portes à charnières silencieuses et étagères intérieures réglables.",
+      "atelier": "mobilier",
+      "categorie_mobilier": "armoire",
+      "matiere": "Wengé",
+      "prix": 720000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80"
+      ],
+      "tags": ["armoire", "rangement"],
+      "enVedette": false,
+      "createdAt": "2026-05-03T10:00:00.000Z",
+      "updatedAt": "2026-05-03T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_mob_004",
+      "titre": "Lit plateforme minimaliste",
+      "description": "Lit plateforme bas en chêne clair, tête de lit intégrée. Lignes contemporaines adaptées aux chambres modernes.",
+      "atelier": "mobilier",
+      "categorie_mobilier": "lit",
+      "matiere": "Chêne",
+      "prix": 560000,
+      "disponible": false,
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80"
+      ],
+      "tags": ["lit", "chambre"],
+      "enVedette": false,
+      "createdAt": "2026-05-04T10:00:00.000Z",
+      "updatedAt": "2026-05-04T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_mob_005",
+      "titre": "Canapé trois places en rotin",
+      "description": "Canapé d'extérieur ou véranda en rotin tressé main, coussins en tissu wax résistant.",
+      "atelier": "mobilier",
+      "categorie_mobilier": "canapé",
+      "matiere": "Rotin et tissu wax",
+      "prix": 390000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+      ],
+      "tags": ["canapé", "rotin", "extérieur"],
+      "enVedette": true,
+      "createdAt": "2026-05-05T10:00:00.000Z",
+      "updatedAt": "2026-05-05T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_mob_006",
+      "titre": "Étagère murale asymétrique",
+      "description": "Étagère modulaire en bois de récupération, finition naturelle. Idéale pour exposer livres et objets décoratifs.",
+      "atelier": "mobilier",
+      "categorie_mobilier": "étagère",
+      "matiere": "Bois de récupération",
+      "prix": 125000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80"
+      ],
+      "tags": ["étagère", "murale"],
+      "enVedette": false,
+      "createdAt": "2026-05-06T10:00:00.000Z",
+      "updatedAt": "2026-05-06T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_art_001",
+      "titre": "Harmonie sahélienne",
+      "description": "Peinture abstraite aux tons ocre et indigo, évoquant les paysages du Sahel au coucher du soleil.",
+      "atelier": "art",
+      "categorie_art": "peinture abstraite",
+      "technique": "Acrylique sur toile",
+      "dimensions": "80 x 100 cm",
+      "prix": 280000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80"
+      ],
+      "tags": ["abstrait", "sahel"],
+      "enVedette": true,
+      "createdAt": "2026-05-07T10:00:00.000Z",
+      "updatedAt": "2026-05-07T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_art_002",
+      "titre": "Portrait de lumière",
+      "description": "Portrait figuratif jouant sur les contrastes de lumière et d'ombre, regard profond et expressif.",
+      "atelier": "art",
+      "categorie_art": "portrait",
+      "technique": "Huile sur toile",
+      "dimensions": "60 x 80 cm",
+      "prix": 350000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1579783902610-fdc54b4f8687?w=800&q=80"
+      ],
+      "tags": ["portrait", "figuratif"],
+      "enVedette": true,
+      "createdAt": "2026-05-08T10:00:00.000Z",
+      "updatedAt": "2026-05-08T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_art_003",
+      "titre": "Rivière des mangroves",
+      "description": "Paysage aquatique représentant les mangroves camerounaises, palette verte et bleue apaisante.",
+      "atelier": "art",
+      "categorie_art": "paysage",
+      "technique": "Acrylique sur toile",
+      "dimensions": "70 x 90 cm",
+      "prix": 220000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1578301978018-3005759f48ae?w=800&q=80"
+      ],
+      "tags": ["paysage", "nature"],
+      "enVedette": false,
+      "createdAt": "2026-05-09T10:00:00.000Z",
+      "updatedAt": "2026-05-09T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_art_004",
+      "titre": "Tableau « Racines »",
+      "description": "Œuvre symbolique célébrant les racines africaines, motifs géométriques et couleurs terre.",
+      "atelier": "art",
+      "categorie_art": "tableau",
+      "technique": "Mixte sur toile",
+      "dimensions": "100 x 120 cm",
+      "prix": 420000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1549490349-8643362247b1?w=800&q=80"
+      ],
+      "tags": ["symbolique", "afrique"],
+      "enVedette": true,
+      "createdAt": "2026-05-10T10:00:00.000Z",
+      "updatedAt": "2026-05-10T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_art_005",
+      "titre": "Éclats urbains",
+      "description": "Composition abstraite inspirée de la vie urbaine de Douala, couleurs vives et dynamiques.",
+      "atelier": "art",
+      "categorie_art": "peinture abstraite",
+      "technique": "Spray et acrylique",
+      "dimensions": "90 x 90 cm",
+      "prix": 195000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&q=80"
+      ],
+      "tags": ["urbain", "abstrait"],
+      "enVedette": false,
+      "createdAt": "2026-05-11T10:00:00.000Z",
+      "updatedAt": "2026-05-11T10:00:00.000Z"
+    },
+    {
+      "_id": "prod_art_006",
+      "titre": "Silhouette au crépuscule",
+      "description": "Portrait en silhouette sur fond dégradé orangé, pièce poétique pour un intérieur contemporain.",
+      "atelier": "art",
+      "categorie_art": "portrait",
+      "technique": "Acrylique sur toile",
+      "dimensions": "50 x 70 cm",
+      "prix": 165000,
+      "disponible": true,
+      "images": [
+        "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80"
+      ],
+      "tags": ["portrait", "silhouette"],
+      "enVedette": false,
+      "createdAt": "2026-05-12T10:00:00.000Z",
+      "updatedAt": "2026-05-12T10:00:00.000Z"
+    }
+  ],
+  "comments": [
+    {
+      "_id": "comm_001",
+      "produit": "prod_mob_001",
+      "auteur": "Marie N.",
+      "contenu": "Magnifique table, finition impeccable. Livraison soignée à Yaoundé.",
+      "note": 5,
+      "valide": true,
+      "createdAt": "2026-05-15T14:00:00.000Z",
+      "updatedAt": "2026-05-15T14:00:00.000Z"
+    },
+    {
+      "_id": "comm_002",
+      "produit": "prod_mob_001",
+      "auteur": "Jean-Paul K.",
+      "contenu": "Très belle pièce, conforme aux photos. Je recommande Cabrel Décor.",
+      "note": 4,
+      "valide": true,
+      "createdAt": "2026-05-18T09:30:00.000Z",
+      "updatedAt": "2026-05-18T09:30:00.000Z"
+    },
+    {
+      "_id": "comm_003",
+      "produit": "prod_art_001",
+      "auteur": "Sophie M.",
+      "contenu": "Cette toile apporte une vraie chaleur à mon salon. Couleurs sublimes.",
+      "note": 5,
+      "valide": true,
+      "createdAt": "2026-05-20T11:00:00.000Z",
+      "updatedAt": "2026-05-20T11:00:00.000Z"
+    },
+    {
+      "_id": "comm_004",
+      "produit": "prod_art_002",
+      "auteur": "David T.",
+      "contenu": "Œuvre saisissante, le cadre sur mesure est un plus.",
+      "note": 5,
+      "valide": true,
+      "createdAt": "2026-05-22T16:45:00.000Z",
+      "updatedAt": "2026-05-22T16:45:00.000Z"
+    },
+    {
+      "_id": "comm_005",
+      "produit": "prod_mob_005",
+      "auteur": "Amina B.",
+      "contenu": "Le canapé est parfait pour notre terrasse. En attente de validation test.",
+      "note": 4,
+      "valide": false,
+      "createdAt": "2026-05-28T08:00:00.000Z",
+      "updatedAt": "2026-05-28T08:00:00.000Z"
+    },
+    {
+      "_id": "comm_006",
+      "produit": "prod_art_004",
+      "auteur": "Patrick O.",
+      "contenu": "Superbe tableau, je souhaite connaître les délais pour une pièce similaire.",
+      "valide": false,
+      "createdAt": "2026-05-29T10:20:00.000Z",
+      "updatedAt": "2026-05-29T10:20:00.000Z"
+    }
+  ]
+}

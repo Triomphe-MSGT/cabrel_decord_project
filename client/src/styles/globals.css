@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cabrel-wood: #8b6914;
+  --color-cabrel-cream: #f5f0e8;
+  --color-cabrel-dark: #2c2416;
+  --font-family-serif: 'Georgia', 'Times New Roman', serif;
+}
+
+body {
+  @apply bg-cabrel-cream text-cabrel-dark antialiased;
+}
