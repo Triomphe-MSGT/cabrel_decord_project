@@ -4,9 +4,10 @@ import { useFilter, PRODUCTS_PER_PAGE } from '../hooks/useFilter';
 import ProductCard from '../components/ui/ProductCard';
 import AtelierLayout from '../components/atelier/AtelierLayout';
 
-export default function Mobilier() {
+export default function Produits() {
   const { filters, setFilter, apiParams, page, setPage, resetFilters, activeFilterCount } = useFilter();
-  const params = { ...apiParams, atelier: 'mobilier' };
+  // No atelier filter needed; params already from useFilter
+  const params = { ...apiParams };
   const { products, loading, error, pagination } = useProducts(params);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Mobilier() {
 
   return (
     <AtelierLayout
-      atelier="mobilier"
+      atelier="produits"
       CardComponent={ProductCard}
       products={products}
       loading={loading}

@@ -11,15 +11,13 @@ import {
 
 const navLinks = [
   { to: '/', label: 'Accueil' },
-  { to: '/mobilier', label: 'Mobilier' },
-  { to: '/art', label: 'Art décoratif' },
+  { to: '/produits', label: 'Produits' },
   { to: '/a-propos', label: 'À propos' },
   { to: '/recherche', label: 'Recherche' },
 ];
 
 const atelierLinks = [
-  { to: '/mobilier', label: 'Atelier Mobilier', desc: 'Tables, chaises, sur mesure' },
-  { to: '/art', label: 'Atelier Art', desc: 'Tableaux & œuvres originales' },
+  { to: '/produits', label: 'Nos réalisations', desc: 'Découvrez notre collection' },
 ];
 
 export default function Footer() {
@@ -91,7 +89,7 @@ export default function Footer() {
           </div>
 
           <div className="footer__col">
-            <h3 className="footer__heading">Nos ateliers</h3>
+            <h3 className="footer__heading">Nos réalisations</h3>
             <ul className="footer__ateliers">
               {atelierLinks.map(({ to, label, desc }) => (
                 <li key={to}>

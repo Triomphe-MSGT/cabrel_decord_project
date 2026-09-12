@@ -14,7 +14,7 @@ const emptySlide = {
   description: '',
   badge: '',
   ctaLabel: '',
-  ctaLink: '/mobilier',
+  ctaLink: '/produits',
   ordre: 1,
   actif: true,
 };
@@ -123,7 +123,7 @@ export default function AdminHero() {
                   onChange={(e) => setForm({ ...form, kicker: e.target.value })}
                   required
                   className="admin-field__input"
-                  placeholder="Ex. Atelier Mobilier"
+                  placeholder="Ex. Nouveautés"
                 />
                 <span className="admin-field__hint">Ligne discrète au-dessus du titre.</span>
               </label>
@@ -134,7 +134,7 @@ export default function AdminHero() {
                   onChange={(e) => setForm({ ...form, title: e.target.value })}
                   required
                   className="admin-field__input"
-                  placeholder="Ex. Mobilier"
+                  placeholder="Ex. Produits"
                 />
               </label>
               <label className="admin-field admin-field--full">
@@ -144,7 +144,7 @@ export default function AdminHero() {
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
                   className="admin-field__input"
-                  placeholder="Ex. L'élégance du bois noble"
+                  placeholder="Ex. Notre collection"
                 />
                 <span className="admin-field__hint">Phrase d&apos;impact mise en valeur sous le titre.</span>
               </label>
@@ -203,7 +203,7 @@ export default function AdminHero() {
                   onChange={(e) => setForm({ ...form, ctaLink: e.target.value })}
                   required
                   className="admin-field__input"
-                  placeholder="/mobilier ou /art"
+                  placeholder="/produits"
                 />
                 <span className="admin-field__hint">Page interne du site (commence par /).</span>
               </label>

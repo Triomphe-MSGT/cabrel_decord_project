@@ -49,16 +49,7 @@ export default function SearchResults() {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {results.map((p) => (
-            <div key={p._id}>
-              <span className="text-xs uppercase text-cabrel-wood mb-1 block">
-                {p.atelier === 'art' ? 'Art' : 'Mobilier'}
-              </span>
-              {p.atelier === 'art' ? (
-                <ArtCard product={p} />
-              ) : (
-                <ProductCard product={p} />
-              )}
-            </div>
+            <ProductCard key={p._id} product={p} />
           ))}
         </div>
 
@@ -76,9 +67,7 @@ export default function SearchResults() {
         {!loading && q && results.length === 0 && (
           <p className="opacity-60">
             Aucun résultat. Essayez d&apos;autres termes ou parcourez{' '}
-            <Link to="/mobilier" className="text-cabrel-wood underline">le mobilier</Link>
-            {' '}et{' '}
-            <Link to="/art" className="text-cabrel-wood underline">l&apos;art</Link>.
+            <Link to="/produits" className="text-cabrel-wood underline">tous les produits</Link>.
           </p>
         )}
       </div>

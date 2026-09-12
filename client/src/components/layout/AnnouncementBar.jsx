@@ -5,9 +5,9 @@ export default function AnnouncementBar() {
     <div className="announcement-bar">
       <div className="announcement-bar-inner">
         <p className="announcement-bar-text">
-          Mobilier artisanal &amp; art décoratif — pièces uniques fabriquées localement.
+          Produits artisanaux — pièces uniques fabriquées localement.
         </p>
-        <Link to="/mobilier" className="announcement-bar-link">
+        <Link to="/produits" className="announcement-bar-link">
           Découvrir la collection
           <span aria-hidden>→</span>
         </Link>

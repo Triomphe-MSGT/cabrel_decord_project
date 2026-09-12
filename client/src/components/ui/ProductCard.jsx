@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../../utils/formatPrice';
 import ProductImageHover from './ProductImageHover';
+import { slugify } from '../../utils/slug';
 
 export default function ProductCard({ product }) {
   const categorie = product.categorie_mobilier || product.categorie_art;
+  const productSlug = slugify(product.titre);
 
   return (
     <Link
-      to={`/mobilier/${product._id}`}
+      to={`/produits/${productSlug}`}
       className="product-card group"
     >
       <ProductImageHover images={product.images} alt={product.titre} aspect="4/3" />

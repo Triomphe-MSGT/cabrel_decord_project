@@ -118,7 +118,7 @@ npm install react-router-dom axios tailwindcss @tailwindcss/vite \
   framer-motion lucide-react react-image-gallery swiper
 
 # Initialiser Tailwind
-npx tailwindcss init -p
+npx tailwindcss init -pa
 
 # --- Backend ---
 cd ../

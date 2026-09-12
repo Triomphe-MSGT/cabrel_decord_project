@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 export const PRODUCTS_PER_PAGE = 10;
 
 const DEFAULT_FILTER = {
-  atelier: '',
   categorie: '',
   prixMin: '',
   prixMax: '',
@@ -85,7 +84,6 @@ export const useFilter = () => {
 
   const apiParams = useMemo(() => {
     const params = { limit: PRODUCTS_PER_PAGE, page };
-    if (filters.atelier) params.atelier = filters.atelier;
     if (filters.categorie) params.categorie = filters.categorie;
     if (filters.prixMin) params.prixMin = filters.prixMin;
     if (filters.prixMax) params.prixMax = filters.prixMax;

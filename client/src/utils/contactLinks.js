@@ -19,8 +19,9 @@ export const formatWhatsAppDisplay = (number) => {
 
 export const getWhatsAppLink = (produit, contact) => {
   const c = mergeContact(contact);
+  const imageUrl = produit.images && produit.images[0] ? produit.images[0] : '';
   const msg = encodeURIComponent(
-    `Bonjour, je suis intéressé(e) par "${produit.titre}" (réf: ${produit._id}) affiché à ${produit.prix} FCFA sur Cabrel Décor.`
+    `Bonjour, je suis intéressé(e) par "${produit.titre}" affiché à ${produit.prix} FCFA sur Cabrel Décor.\nImage : ${imageUrl}`
   );
   return c.whatsapp ? `https://wa.me/${c.whatsapp}?text=${msg}` : null;
 };

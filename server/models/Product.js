@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema(
     _id: { type: String, required: true },
     titre: { type: String, required: true, trim: true },
     description: { type: String, required: true },
-    atelier: { type: String, enum: ['mobilier', 'art'], required: true },
+    atelier: { type: String, enum: ['mobilier', 'art'] },
     categorie_mobilier: {
       type: String,
       enum: ['table', 'chaise', 'armoire', 'lit', 'canapé', 'étagère', 'autre'],

@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { formatPrice } from '../../utils/formatPrice';
 import ProductImageHover from '../ui/ProductImageHover';
+import { slugify } from '../../utils/slug';
 
 export default function FeaturedCard({ product, variant = 'compact' }) {
-  const path = product.atelier === 'art' ? `/art/${product._id}` : `/mobilier/${product._id}`;
+  const productSlug = slugify(product.titre);
+  const path = `/produits/${productSlug}`;
   const categorie = product.categorie_mobilier || product.categorie_art;
   const isLead = variant === 'lead';
 
@@ -14,11 +16,7 @@ export default function FeaturedCard({ product, variant = 'compact' }) {
         <ProductImageHover
           images={product.images}
           alt={product.titre}
-          aspect={isLead ? '4/3' : product.atelier === 'art' ? '1/1' : '4/3'}
         />
-        <span className="featured-card__badge">
-          {product.atelier === 'art' ? 'Art' : 'Mobilier'}
-        </span>
         {isLead && <span className="featured-card__spotlight">Coup de cœur</span>}
       </div>
       <div className="featured-card__body">

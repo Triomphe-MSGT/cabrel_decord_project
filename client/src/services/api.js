@@ -45,12 +45,12 @@ export const featuredApi = {
 };
 
 export const adminApi = {
-  login: (email, password) => api.post('/admin/login', { email, password }),
-  getProfile: () => api.get('/admin/profile'),
-  updateProfile: (data) => api.put('/admin/profile', data),
-  getContact: () => api.get('/admin/contact'),
-  updateContact: (data) => api.put('/admin/contact', data),
-  getStats: () => api.get('/admin/stats'),
+  login: (email, password) => api.post('/cdm/login', { email, password }),
+  getProfile: () => api.get('/cdm/profile'),
+  updateProfile: (data) => api.put('/cdm/profile', data),
+  getContact: () => api.get('/cdm/contact'),
+  updateContact: (data) => api.put('/cdm/contact', data),
+  getStats: () => api.get('/cdm/stats'),
 };
 
 export const settingsApi = {
@@ -62,7 +62,7 @@ export const uploadApi = {
     const form = new FormData();
     form.append('image', file);
     form.append('folder', folder);
-    return api.post('/admin/upload', form, {
+    return api.post('/cdm/upload', form, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   },

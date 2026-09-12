@@ -7,7 +7,7 @@ export default function ContactButtons({ produit }) {
   if (!produit) return null;
 
   const links = [
-    { href: getWhatsAppLink(produit, contact), label: 'WhatsApp', icon: MessageCircle, color: 'bg-green-600' },
+    { href: getWhatsAppLink(produit, contact), label: 'Commander', icon: MessageCircle, color: 'bg-green-600' },
     { href: getGmailLink(produit, contact), label: 'Gmail', icon: Mail, color: 'bg-red-600' },
     { href: getFacebookLink(contact), label: 'Facebook', icon: Facebook, color: 'bg-blue-600' },
   ].filter((l) => l.href);

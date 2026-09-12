@@ -14,7 +14,11 @@
         "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80",
         "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80"
       ],
-      "tags": ["teck", "salle à manger", "artisanal"],
+      "tags": [
+        "teck",
+        "salle à manger",
+        "artisanal"
+      ],
       "enVedette": true,
       "ordreVedette": 1,
       "createdAt": "2026-05-01T10:00:00.000Z",
@@ -33,7 +37,10 @@
         "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80",
         "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80"
       ],
-      "tags": ["chaise", "iroko"],
+      "tags": [
+        "chaise",
+        "iroko"
+      ],
       "enVedette": true,
       "ordreVedette": 2,
       "createdAt": "2026-05-02T10:00:00.000Z",
@@ -52,7 +59,10 @@
         "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80",
         "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80"
       ],
-      "tags": ["armoire", "rangement"],
+      "tags": [
+        "armoire",
+        "rangement"
+      ],
       "enVedette": false,
       "createdAt": "2026-05-03T10:00:00.000Z",
       "updatedAt": "2026-05-03T10:00:00.000Z"
@@ -69,7 +79,10 @@
       "images": [
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80"
       ],
-      "tags": ["lit", "chambre"],
+      "tags": [
+        "lit",
+        "chambre"
+      ],
       "enVedette": false,
       "createdAt": "2026-05-04T10:00:00.000Z",
       "updatedAt": "2026-05-04T10:00:00.000Z"
@@ -88,7 +101,11 @@
         "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80",
         "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
       ],
-      "tags": ["canapé", "rotin", "extérieur"],
+      "tags": [
+        "canapé",
+        "rotin",
+        "extérieur"
+      ],
       "enVedette": true,
       "ordreVedette": 3,
       "createdAt": "2026-05-05T10:00:00.000Z",
@@ -107,136 +124,24 @@
         "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&q=80",
         "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80"
       ],
-      "tags": ["étagère", "murale"],
+      "tags": [
+        "étagère",
+        "murale"
+      ],
       "enVedette": false,
       "createdAt": "2026-05-06T10:00:00.000Z",
       "updatedAt": "2026-05-06T10:00:00.000Z"
-    },
-    {
-      "_id": "prod_art_001",
-      "titre": "Harmonie sahélienne",
-      "description": "Peinture abstraite aux tons ocre et indigo, évoquant les paysages du Sahel au coucher du soleil.",
-      "atelier": "art",
-      "categorie_art": "peinture abstraite",
-      "technique": "Acrylique sur toile",
-      "dimensions": "80 x 100 cm",
-      "prix": 280000,
-      "disponible": true,
-      "images": [
-        "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80",
-        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
-      ],
-      "tags": ["abstrait", "sahel"],
-      "enVedette": true,
-      "ordreVedette": 4,
-      "createdAt": "2026-05-07T10:00:00.000Z",
-      "updatedAt": "2026-05-07T10:00:00.000Z"
-    },
-    {
-      "_id": "prod_art_002",
-      "titre": "Portrait de lumière",
-      "description": "Portrait figuratif jouant sur les contrastes de lumière et d'ombre, regard profond et expressif.",
-      "atelier": "art",
-      "categorie_art": "portrait",
-      "technique": "Huile sur toile",
-      "dimensions": "60 x 80 cm",
-      "prix": 350000,
-      "disponible": true,
-      "images": [
-        "https://images.unsplash.com/photo-1579783902610-fdc54b4f8687?w=800&q=80",
-        "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80"
-      ],
-      "tags": ["portrait", "figuratif"],
-      "enVedette": true,
-      "ordreVedette": 5,
-      "createdAt": "2026-05-08T10:00:00.000Z",
-      "updatedAt": "2026-05-08T10:00:00.000Z"
-    },
-    {
-      "_id": "prod_art_003",
-      "titre": "Rivière des mangroves",
-      "description": "Paysage aquatique représentant les mangroves camerounaises, palette verte et bleue apaisante.",
-      "atelier": "art",
-      "categorie_art": "paysage",
-      "technique": "Acrylique sur toile",
-      "dimensions": "70 x 90 cm",
-      "prix": 220000,
-      "disponible": true,
-      "images": [
-        "https://images.unsplash.com/photo-1578301978018-3005759f48ae?w=800&q=80",
-        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
-      ],
-      "tags": ["paysage", "nature"],
-      "enVedette": false,
-      "createdAt": "2026-05-09T10:00:00.000Z",
-      "updatedAt": "2026-05-09T10:00:00.000Z"
-    },
-    {
-      "_id": "prod_art_004",
-      "titre": "Tableau « Racines »",
-      "description": "Œuvre symbolique célébrant les racines africaines, motifs géométriques et couleurs terre.",
-      "atelier": "art",
-      "categorie_art": "tableau",
-      "technique": "Mixte sur toile",
-      "dimensions": "100 x 120 cm",
-      "prix": 420000,
-      "disponible": true,
-      "images": [
-        "https://images.unsplash.com/photo-1549490349-8643362247b1?w=800&q=80",
-        "https://images.unsplash.com/photo-1616136237343-2c67f44fc72?w=800&q=80"
-      ],
-      "tags": ["symbolique", "afrique"],
-      "enVedette": true,
-      "ordreVedette": 6,
-      "createdAt": "2026-05-10T10:00:00.000Z",
-      "updatedAt": "2026-05-10T10:00:00.000Z"
-    },
-    {
-      "_id": "prod_art_005",
-      "titre": "Éclats urbains",
-      "description": "Composition abstraite inspirée de la vie urbaine de Douala, couleurs vives et dynamiques.",
-      "atelier": "art",
-      "categorie_art": "peinture abstraite",
-      "technique": "Spray et acrylique",
-      "dimensions": "90 x 90 cm",
-      "prix": 195000,
-      "disponible": true,
-      "images": [
-        "https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&q=80"
-      ],
-      "tags": ["urbain", "abstrait"],
-      "enVedette": false,
-      "createdAt": "2026-05-11T10:00:00.000Z",
-      "updatedAt": "2026-05-11T10:00:00.000Z"
-    },
-    {
-      "_id": "prod_art_006",
-      "titre": "Silhouette au crépuscule",
-      "description": "Portrait en silhouette sur fond dégradé orangé, pièce poétique pour un intérieur contemporain.",
-      "atelier": "art",
-      "categorie_art": "portrait",
-      "technique": "Acrylique sur toile",
-      "dimensions": "50 x 70 cm",
-      "prix": 165000,
-      "disponible": true,
-      "images": [
-        "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80"
-      ],
-      "tags": ["portrait", "silhouette"],
-      "enVedette": false,
-      "createdAt": "2026-05-12T10:00:00.000Z",
-      "updatedAt": "2026-05-12T10:00:00.000Z"
     }
   ],
   "featuredSection": {
     "kicker": "Sélection du moment",
     "title": "À la une",
-    "subtitle": "Nos coups de cœur — survolez une image pour découvrir le produit en situation.",
+    "subtitle": "Nos coups de cœur survolez une image pour découvrir le produit en situation.",
     "maxItems": 6,
     "actif": true,
     "ctaLabel": "Explorer le catalogue",
-    "ctaLink": "/mobilier",
-    "updatedAt": "2026-05-01T10:00:00.000Z"
+    "ctaLink": "/produits",
+    "updatedAt": "2026-09-11T22:44:21.163Z"
   },
   "comments": [
     {
@@ -260,26 +165,6 @@
       "updatedAt": "2026-05-18T09:30:00.000Z"
     },
     {
-      "_id": "comm_003",
-      "produit": "prod_art_001",
-      "auteur": "Sophie M.",
-      "contenu": "Cette toile apporte une vraie chaleur à mon salon. Couleurs sublimes.",
-      "note": 5,
-      "valide": true,
-      "createdAt": "2026-05-20T11:00:00.000Z",
-      "updatedAt": "2026-05-20T11:00:00.000Z"
-    },
-    {
-      "_id": "comm_004",
-      "produit": "prod_art_002",
-      "auteur": "David T.",
-      "contenu": "Œuvre saisissante, le cadre sur mesure est un plus.",
-      "note": 5,
-      "valide": true,
-      "createdAt": "2026-05-22T16:45:00.000Z",
-      "updatedAt": "2026-05-22T16:45:00.000Z"
-    },
-    {
       "_id": "comm_005",
       "produit": "prod_mob_005",
       "auteur": "Amina B.",
@@ -288,15 +173,6 @@
       "valide": false,
       "createdAt": "2026-05-28T08:00:00.000Z",
       "updatedAt": "2026-05-28T08:00:00.000Z"
-    },
-    {
-      "_id": "comm_006",
-      "produit": "prod_art_004",
-      "auteur": "Patrick O.",
-      "contenu": "Superbe tableau, je souhaite connaître les délais pour une pièce similaire.",
-      "valide": false,
-      "createdAt": "2026-05-29T10:20:00.000Z",
-      "updatedAt": "2026-05-29T10:20:00.000Z"
     }
   ],
   "heroSlides": [
@@ -304,13 +180,13 @@
       "_id": "hero_001",
       "mainImage": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80",
       "insetImage": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80",
-      "kicker": "Atelier Mobilier",
-      "title": "Mobilier",
-      "name": "Artisanat & bois noble",
-      "description": "Tables, chaises et pièces sur mesure, façonnées à la main dans nos ateliers.",
-      "badge": "Fabrication artisanale",
-      "ctaLabel": "Découvrir",
-      "ctaLink": "/mobilier",
+      "kicker": "Nouveautés",
+      "title": "Produits",
+      "name": "Notre collection",
+      "description": "Découvrez notre sélection de mobilier et d'art décoratif.",
+      "badge": "Qualité artisanale",
+      "ctaLabel": "Voir les produits",
+      "ctaLink": "/produits",
       "ordre": 1,
       "actif": true,
       "createdAt": "2026-05-01T10:00:00.000Z",
@@ -320,13 +196,13 @@
       "_id": "hero_002",
       "mainImage": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80",
       "insetImage": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&q=80",
-      "kicker": "Atelier Art",
-      "title": "Art décoratif",
-      "name": "Œuvres originales",
-      "description": "Tableaux et peintures pour sublimer vos murs avec authenticité.",
-      "badge": "Créations uniques",
-      "ctaLabel": "Explorer",
-      "ctaLink": "/art",
+      "kicker": "Nouveautés",
+      "title": "Produits",
+      "name": "Notre collection",
+      "description": "Découvrez notre sélection de mobilier et d'art décoratif.",
+      "badge": "Qualité artisanale",
+      "ctaLabel": "Voir les produits",
+      "ctaLink": "/produits",
       "ordre": 2,
       "actif": true,
       "createdAt": "2026-05-01T10:00:00.000Z",
@@ -336,13 +212,13 @@
       "_id": "hero_003",
       "mainImage": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80",
       "insetImage": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80",
-      "kicker": "Cabrel Décor",
-      "title": "Nos univers",
-      "name": "Mobilier & art",
-      "description": "Deux ateliers réunis pour habiller chaque intérieur avec élégance.",
-      "badge": "Sur mesure",
-      "ctaLabel": "Voir le catalogue",
-      "ctaLink": "/mobilier",
+      "kicker": "Nouveautés",
+      "title": "Produits",
+      "name": "Notre collection",
+      "description": "Découvrez notre sélection de mobilier et d'art décoratif.",
+      "badge": "Qualité artisanale",
+      "ctaLabel": "Voir les produits",
+      "ctaLink": "/produits",
       "ordre": 3,
       "actif": true,
       "createdAt": "2026-05-01T10:00:00.000Z",

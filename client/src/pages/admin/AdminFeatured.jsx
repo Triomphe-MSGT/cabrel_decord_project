@@ -12,7 +12,7 @@ const emptySection = {
   maxItems: 6,
   actif: true,
   ctaLabel: 'Explorer le catalogue',
-  ctaLink: '/mobilier',
+  ctaLink: '/produits',
 };
 
 export default function AdminFeatured() {
@@ -204,7 +204,7 @@ export default function AdminFeatured() {
                 value={section.ctaLink}
                 onChange={(e) => setSection({ ...section, ctaLink: e.target.value })}
                 className="admin-field__input"
-                placeholder="/mobilier"
+                placeholder="/produits"
               />
             </label>
             <label className="admin-field admin-field--check admin-field--full">

@@ -16,7 +16,7 @@ export default function AdminLogin() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/admin/dashboard', { replace: true });
+      navigate('/cdm/dashboard', { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
@@ -26,7 +26,7 @@ export default function AdminLogin() {
     setError(null);
     try {
       await login(email.trim(), password);
-      navigate('/admin/dashboard');
+      navigate('/cdm/dashboard');
     } catch {
       setError('Email ou mot de passe incorrect');
     } finally {

@@ -6,40 +6,6 @@ import AdminShell from '../../components/admin/AdminShell';
 import { ADMIN_QUICK_ACTIONS } from '../../config/adminNav';
 import PageTransition from '../../components/layout/PageTransition';
 
-function AtelierPanel({ title, icon: Icon, count, vedette, variant, productsLink, addLink }) {
-  return (
-    <article className={`admin-atelier-panel admin-atelier-panel--${variant}`}>
-      <div className="admin-atelier-panel__head">
-        <span className="admin-atelier-panel__icon">
-          <Icon size={22} strokeWidth={1.75} />
-        </span>
-        <div>
-          <h2 className="admin-atelier-panel__title">{title}</h2>
-          <p className="admin-atelier-panel__stats">
-            <strong>{count}</strong> produit{count !== 1 ? 's' : ''}
-            {vedette > 0 && (
-              <>
-                {' · '}
-                <strong>{vedette}</strong> en vedette
-              </>
-            )}
-          </p>
-        </div>
-      </div>
-      <div className="admin-atelier-panel__actions">
-        <Link to={productsLink} className="admin-atelier-panel__link">
-          Gérer le catalogue
-          <ArrowRight size={16} />
-        </Link>
-        <Link to={addLink} className="admin-atelier-panel__add">
-          <Plus size={16} />
-          Nouveau produit
-        </Link>
-      </div>
-    </article>
-  );
-}
-
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null);
 
@@ -52,29 +18,29 @@ export default function AdminDashboard() {
       <AdminShell
         wide
         title="Tableau de bord"
-        description="Vue d'ensemble par atelier et accès rapide."
+        description="Vue d'ensemble du catalogue et accès rapide."
       >
         {stats && (
           <>
-            <section className="admin-dash-ateliers">
-              <AtelierPanel
-                title="Atelier Mobilier"
-                icon={Armchair}
-                count={stats.mobilier}
-                vedette={stats.mobilierVedette}
-                variant="mobilier"
-                productsLink="/admin/produits?atelier=mobilier"
-                addLink="/admin/produits?atelier=mobilier&new=1"
-              />
-              <AtelierPanel
-                title="Atelier Art"
-                icon={Palette}
-                count={stats.art}
-                vedette={stats.artVedette}
-                variant="art"
-                productsLink="/admin/produits?atelier=art"
-                addLink="/admin/produits?atelier=art&new=1"
-              />
+            <section className="admin-dash-summary">
+              <div className="admin-dash-stat">
+                <h3 className="admin-dash-stat-title">Produits</h3>
+                <p className="admin-dash-stat-value">
+                  <strong>{stats.mobilier + stats.art}</strong> produit{(stats.mobilier + stats.art) !== 1 ? 's' : ''}
+                  {(stats.mobilierVedette + stats.artVedette) > 0 && (
+                    <>
+                      {' · '}
+                      <strong>{stats.mobilierVedette + stats.artVedette}</strong> en vedette
+                    </>
+                  )}
+                </p>
+              </div>
+              <div className="admin-dash-stat">
+                <h3 className="admin-dash-stat-title">Commentaires</h3>
+                <p className="admin-dash-stat-value">
+                  <strong>{stats.pendingComments}</strong> en attente de modération
+                </p>
+              </div>
             </section>
 
             {stats.pendingComments > 0 && (
@@ -84,7 +50,7 @@ export default function AdminDashboard() {
                   <strong>{stats.pendingComments}</strong> commentaire
                   {stats.pendingComments !== 1 ? 's' : ''} en attente de modération
                 </p>
-                <Link to="/admin/commentaires" className="admin-dash-alert__link">
+                <Link to="/cdm/commentaires" className="admin-dash-alert__link">
                   Modérer
                 </Link>
               </div>

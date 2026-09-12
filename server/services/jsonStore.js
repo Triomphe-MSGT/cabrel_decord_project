@@ -18,8 +18,7 @@ const save = () => {
 };
 
 const matchesQuery = (product, query) => {
-  if (query.atelier && product.atelier !== query.atelier) return false;
-  if (query.disponible !== undefined && product.disponible !== (query.disponible === 'true')) {
+    if (query.disponible !== undefined && product.disponible !== (query.disponible === 'true')) {
     return false;
   }
   if (query.enVedette === 'true' && !product.enVedette) return false;

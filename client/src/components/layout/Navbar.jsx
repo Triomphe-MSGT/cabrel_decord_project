@@ -9,8 +9,7 @@ const navLinkClass = ({ isActive }) =>
 
 const links = [
   { to: '/', label: 'Accueil', end: true },
-  { to: '/mobilier', label: 'Mobilier' },
-  { to: '/art', label: 'Art' },
+  { to: '/produits', label: 'Produits' },
   { to: '/a-propos', label: 'À propos' },
 ];
 

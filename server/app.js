@@ -42,7 +42,7 @@ app.use('/api/products', productsRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/hero', heroRouter);
 app.use('/api/featured', featuredRouter);
-app.use('/api/admin', adminRouter);
+app.use('/api/cdm', adminRouter);
 app.use('/api/settings', settingsRouter);
 
 app.get('/api/health', (_, res) => {

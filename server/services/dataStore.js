@@ -21,7 +21,6 @@ const getSort = (sort) => {
 
 const buildMongoFilter = (query) => {
   const filter = {};
-  if (query.atelier) filter.atelier = query.atelier;
   if (query.disponible !== undefined) filter.disponible = query.disponible === 'true';
   if (query.enVedette === 'true') filter.enVedette = true;
   if (query.categorie) {
@@ -219,6 +218,8 @@ const featured = {
       ctaLabel: 'Explorer le catalogue',
       ctaLink: '/mobilier',
     };
+    if (section.actif === false) return { section, products: [] };
+    const max = Math.min(12, Number(section.maxItems) || 6);
     const [featuredProducts, all] = await Promise.all([
       Product.find({ enVedette: true }).sort({ ordreVedette: 1 }).lean(),
       Product.find().sort({ createdAt: -1 }).lean(),

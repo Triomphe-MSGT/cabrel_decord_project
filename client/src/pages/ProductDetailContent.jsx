@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useProduct } from '../hooks/useProducts';
 import { commentsApi } from '../services/api';
 import { formatPrice } from '../utils/formatPrice';
 import ImageGallery from '../components/ui/ImageGallery';
@@ -9,48 +8,42 @@ import CommentList from '../components/ui/CommentList';
 import CommentForm from '../components/ui/CommentForm';
 import PageTransition from '../components/layout/PageTransition';
 
-export default function ProductDetailContent({ id, atelier }) {
-  const { product, loading, error } = useProduct(id);
+export default function ProductDetailContent({ product }) {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
-  const listPath = atelier === 'art' ? '/art' : '/mobilier';
-
   const loadComments = () => {
-    if (!id) return;
+    if (!product?._id) return;
     setCommentsLoading(true);
     commentsApi
-      .getByProduct(id)
+      .getByProduct(product._id)
       .then(({ data }) => setComments(data))
       .finally(() => setCommentsLoading(false));
   };
 
   useEffect(() => {
     loadComments();
-  }, [id]);
+  }, [product?._id]);
 
-  if (loading) return <p className="text-center py-20 opacity-60">Chargement...</p>;
-  if (error || !product) {
-    return (
-      <p className="text-center py-20 text-red-600">
-        {error || 'Produit introuvable'}
-      </p>
-    );
+  if (!product) {
+    return <p className="text-center py-20 opacity-60">Chargement...</p>;
   }
 
-  const categorie =
-    atelier === 'art' ? product.categorie_art : product.categorie_mobilier;
+  // Determine category from whichever field is populated
+  const categorie = product.categorie_mobilier || product.categorie_art || '';
 
   return (
     <PageTransition>
       <div className="product-detail max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-10">
-        <Link to={listPath} className="text-sm text-cabrel-wood hover:underline mb-4 sm:mb-6 inline-block">
-          ← Retour
+        <Link to="/produits" className="text-sm text-cabrel-wood hover:underline mb-4 sm:mb-6 inline-block">
+          ← Retour aux produits
         </Link>
         <div className="product-detail__layout">
           <ImageGallery images={product.images} title={product.titre} />
           <div className="product-detail__info">
-            <p className="text-xs sm:text-sm uppercase text-cabrel-wood">{categorie}</p>
+            {categorie && (
+              <p className="text-xs sm:text-sm uppercase text-cabrel-wood">{categorie}</p>
+            )}
             <h1 className="font-serif text-xl sm:text-2xl lg:text-3xl mt-1 leading-tight break-words">
               {product.titre}
             </h1>

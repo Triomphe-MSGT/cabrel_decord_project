@@ -1,13 +1,12 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAdmin } from './context/AdminContext';
 import Navbar from './components/layout/Navbar';
 import AnnouncementBar from './components/layout/AnnouncementBar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
-import Mobilier from './pages/Mobilier';
-import MobilierDetail from './pages/MobilierDetail';
-import Art from './pages/Art';
-import ArtDetail from './pages/ArtDetail';
+import Produits from './pages/Produits';
+import ProductDetail from './pages/ProductDetail';
 import SearchResults from './pages/SearchResults';
 import About from './pages/About';
 import AdminLogin from './pages/admin/AdminLogin';
@@ -22,15 +21,19 @@ import AdminContact from './pages/admin/AdminContact';
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAdmin();
   if (!isAuthenticated) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/cdm" replace />;
   }
   return children;
 }
 
 function AppLayout() {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin');
+  const isAdminRoute = location.pathname.startsWith('/cdm');
   const isPublicLayout = !isAdminRoute;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -40,17 +43,15 @@ function AppLayout() {
         <Routes>
           {/* Public */}
           <Route path="/" element={<Home />} />
-          <Route path="/mobilier" element={<Mobilier />} />
-          <Route path="/mobilier/:id" element={<MobilierDetail />} />
-          <Route path="/art" element={<Art />} />
-          <Route path="/art/:id" element={<ArtDetail />} />
+          <Route path="/produits" element={<Produits />} />
+          <Route path="/produits/:slug" element={<ProductDetail />} />
           <Route path="/recherche" element={<SearchResults />} />
           <Route path="/a-propos" element={<About />} />
 
           {/* Admin */}
-          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/cdm" element={<AdminLogin />} />
           <Route
-            path="/admin/dashboard"
+            path="/cdm/dashboard"
             element={
               <ProtectedRoute>
                 <AdminDashboard />
@@ -58,7 +59,7 @@ function AppLayout() {
             }
           />
           <Route
-            path="/admin/produits"
+            path="/cdm/produits"
             element={
               <ProtectedRoute>
                 <AdminProducts />
@@ -66,7 +67,7 @@ function AppLayout() {
             }
           />
           <Route
-            path="/admin/hero"
+            path="/cdm/hero"
             element={
               <ProtectedRoute>
                 <AdminHero />
@@ -74,7 +75,7 @@ function AppLayout() {
             }
           />
           <Route
-            path="/admin/featured"
+            path="/cdm/featured"
             element={
               <ProtectedRoute>
                 <AdminFeatured />
@@ -82,7 +83,7 @@ function AppLayout() {
             }
           />
           <Route
-            path="/admin/commentaires"
+            path="/cdm/commentaires"
             element={
               <ProtectedRoute>
                 <AdminComments />
@@ -90,7 +91,7 @@ function AppLayout() {
             }
           />
           <Route
-            path="/admin/profil"
+            path="/cdm/profil"
             element={
               <ProtectedRoute>
                 <AdminProfile />
@@ -98,13 +99,14 @@ function AppLayout() {
             }
           />
           <Route
-            path="/admin/contact"
+            path="/cdm/contact"
             element={
               <ProtectedRoute>
                 <AdminContact />
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       {isPublicLayout && <Footer />}

@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Armchair, Palette } from 'lucide-react';
 import { productsApi } from '../../services/api';
 import { formatPrice } from '../../utils/formatPrice';
 import { resolveMediaUrl } from '../../utils/mediaUrl';
@@ -8,29 +7,44 @@ import AdminShell from '../../components/admin/AdminShell';
 import ImageListEditor from '../../components/admin/ImageListEditor';
 import PageTransition from '../../components/layout/PageTransition';
 
-const ATELIERS = [
-  { id: 'mobilier', label: 'Atelier Mobilier', icon: Armchair },
-  { id: 'art', label: 'Atelier Art', icon: Palette },
+// Category lists (must match those in Product model)
+const MOBILIER_CATEGORIES = [
+  'table',
+  'chaise',
+  'armoire',
+  'lit',
+  'canapé',
+  'étagère',
+  'autre',
+];
+const ART_CATEGORIES = [
+  'tableau',
+  'peinture abstraite',
+  'portrait',
+  'paysage',
+  'autre',
 ];
 
-const emptyProduct = (atelier) => ({
+const emptyProduct = () => ({
   titre: '',
   description: '',
-  atelier,
   prix: '',
   disponible: true,
   enVedette: false,
   images: [],
   tags: [],
+  categorie_mobilier: '',
+  categorie_art: '',
+  matiere: '',
+  technique: '',
+  dimensions: '',
 });
 
 export default function AdminProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const atelier = searchParams.get('atelier') === 'art' ? 'art' : 'mobilier';
-  const formRef = useRef(null);
-
+  const [formRef, setFormRef] = useState(null);
   const [products, setProducts] = useState([]);
-  const [form, setForm] = useState(emptyProduct(atelier));
+  const [form, setForm] = useState(emptyProduct());
   const [editingId, setEditingId] = useState(null);
   const [images, setImages] = useState([]);
   const [saving, setSaving] = useState(false);
@@ -47,35 +61,39 @@ export default function AdminProducts() {
     load();
   }, []);
 
+  // When editing, load product data into form
   useEffect(() => {
-    setForm(emptyProduct(atelier));
-    setEditingId(null);
-    setImages([]);
-  }, [atelier]);
-
-  useEffect(() => {
-    if (searchParams.get('new') === '1') {
-      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setSearchParams({ atelier }, { replace: true });
+    if (editingId) {
+      const product = products.find((p) => p._id === editingId);
+      if (product) {
+        setForm({
+          titre: product.titre,
+          description: product.description,
+          prix: product.prix ?? '',
+          disponible: product.disponible ?? true,
+          enVedette: product.enVedette ?? false,
+          images: product.images || [],
+          tags: product.tags || [],
+          categorie_mobilier: product.categorie_mobilier || '',
+          categorie_art: product.categorie_art || '',
+          matiere: product.matiere || '',
+          technique: product.technique || '',
+          dimensions: product.dimensions || '',
+        });
+        setImages(product.images || []);
+      }
     }
-  }, [searchParams, atelier, setSearchParams]);
-
-  const filtered = products.filter((p) => p.atelier === atelier);
-
-  const switchAtelier = (id) => {
-    setSearchParams({ atelier: id });
-  };
-
-  const resetForm = () => {
-    setForm(emptyProduct(atelier));
-    setEditingId(null);
-    setImages([]);
-  };
+  }, [editingId, products]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError(null);
     setFormSuccess(null);
+
+    const formRefEl = formRef.current;
+    if (formRefEl) {
+      formRefEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     if (!images.length) {
       setFormError('Ajoutez au moins une photo avant de publier.');
@@ -95,12 +113,16 @@ export default function AdminProducts() {
     const payload = {
       titre: form.titre.trim(),
       description: form.description.trim(),
-      atelier,
       prix,
       disponible: form.disponible,
       enVedette: form.enVedette,
       images,
       tags: form.tags || [],
+      categorie_mobilier: form.categorie_mobilier ?? '',
+      categorie_art: form.categorie_art ?? '',
+      matiere: form.matiere ?? '',
+      technique: form.technique ?? '',
+      dimensions: form.dimensions ?? '',
     };
 
     setSaving(true);
@@ -121,15 +143,18 @@ export default function AdminProducts() {
     }
   };
 
+  const resetForm = () => {
+    setForm(emptyProduct());
+    setEditingId(null);
+    setImages([]);
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+  };
+
   const handleEdit = (p) => {
     setEditingId(p._id);
-    setForm({
-      ...p,
-      atelier,
-      prix: p.prix ?? '',
-    });
-    setImages(p.images?.length ? p.images : []);
-    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Form will be populated via useEffect above
   };
 
   const handleDelete = async (id) => {
@@ -139,33 +164,31 @@ export default function AdminProducts() {
     load();
   };
 
-  const atelierMeta = ATELIERS.find((a) => a.id === atelier);
+  const handleCategoryChange = (e) => {
+    const val = e.target.value;
+    let newMobilier = '';
+    let newArt = '';
+    if (val) {
+      if (MOBILIER_CATEGORIES.includes(val)) {
+        newMobilier = val;
+      } else if (ART_CATEGORIES.includes(val)) {
+        newArt = val;
+      }
+    }
+    setForm(prev => ({
+      ...prev,
+      categorie_mobilier: newMobilier,
+      categorie_art: newArt,
+    }));
+  };
 
   return (
     <PageTransition>
       <AdminShell
-        title="Produits par atelier"
-        description="Gérez le catalogue séparément pour chaque atelier."
+        title="Produits"
+        description={`Gérez le catalogue complet. Total : ${products.length} produit${products.length !== 1 ? 's' : ''}`}
       >
-        <div className="admin-atelier-tabs" role="tablist" aria-label="Choisir un atelier">
-          {ATELIERS.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              type="button"
-              role="tab"
-              aria-selected={atelier === id}
-              onClick={() => switchAtelier(id)}
-              className={`admin-atelier-tabs__btn${atelier === id ? ' admin-atelier-tabs__btn--active' : ''}${id === 'art' ? ' admin-atelier-tabs__btn--art' : ''}`}
-            >
-              <Icon size={18} />
-              {label}
-              <span className="admin-atelier-tabs__count">
-                {products.filter((p) => p.atelier === id).length}
-              </span>
-            </button>
-          ))}
-        </div>
-
+        {/* No atelier tabs */}
         <form
           ref={formRef}
           onSubmit={handleSubmit}
@@ -175,7 +198,7 @@ export default function AdminProducts() {
             {editingId ? 'Modifier le produit' : 'Nouveau produit'}
           </h2>
           <p className="admin-card__desc -mt-2 mb-6">
-            Atelier {atelierMeta?.label} — remplissez chaque section ci-dessous.
+            Remplissez chaque section ci-dessous.
           </p>
 
           {formError && <p className="admin-login__error mb-4">{formError}</p>}
@@ -213,6 +236,38 @@ export default function AdminProducts() {
                 <span className="admin-field__hint">
                   Décrivez le produit en détail pour rassurer le client.
                 </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset className="admin-form-section">
+            <legend className="admin-form-section__title">Catégorie</legend>
+            <p className="admin-form-section__desc">
+              Sélectionnez la catégorie du produit.
+            </p>
+            <div className="admin-form-grid">
+              <label className="admin-field">
+                <span className="admin-field__label">Catégorie</span>
+                <select
+                  value={form.categorie_mobilier || form.categorie_art || ''}
+                  onChange={handleCategoryChange}
+                  className="admin-field__input"
+                >
+                  <option value="">— Choisir une catégorie —</option>
+                  {/* Mobilier categories */}
+                  {MOBILIER_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    </option>
+                  ))}
+                  {/* Art categories */}
+                  {ART_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    </option>
+                  ))}
+                </select>
+                <span className="admin-field__hint">Catégorie du produit.</span>
               </label>
             </div>
           </fieldset>
@@ -266,6 +321,50 @@ export default function AdminProducts() {
           </fieldset>
 
           <fieldset className="admin-form-section">
+            <legend className="admin-form-section__title">Caractéristiques techniques</legend>
+            <p className="admin-form-section__desc">
+              Détails supplémentaires sur le produit (optionnels).
+            </p>
+            <div className="admin-form-grid">
+              <label className="admin-field admin-field--full">
+                <span className="admin-field__label">Matière</span>
+                <input
+                  type="text"
+                  value={form.matiere}
+                  onChange={(e) => setForm({ ...form, matiere: e.target.value })}
+                  placeholder="Ex. Teck massif, Iroko, Chêne…"
+                  className="admin-field__input"
+                />
+                <span className="admin-field__hint">Matériau principal du produit.</span>
+              </label>
+
+              <label className="admin-field admin-field--full">
+                <span className="admin-field__label">Technique</span>
+                <input
+                  type="text"
+                  value={form.technique}
+                  onChange={(e) => setForm({ ...form, technique: e.target.value })}
+                  placeholder="Ex. Acrylique sur toile, Sculpture sur bois…"
+                  className="admin-field__input"
+                />
+                <span className="admin-field__hint">Pour les œuvres d’art, indiquez la technique utilisée.</span>
+              </label>
+
+              <label className="admin-field admin-field--full">
+                <span className="admin-field__label">Dimensions</span>
+                <input
+                  type="text"
+                  value={form.dimensions}
+                  onChange={(e) => setForm({ ...form, dimensions: e.target.value })}
+                  placeholder="Ex. 60 x 80 cm, 200 x 100 x 75 cm…"
+                  className="admin-field__input"
+                />
+                <span className="admin-field__hint">Largeur × Hauteur × Profondeur (si applicable).</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset className="admin-form-section">
             <legend className="admin-form-section__title">Photos du produit</legend>
             <p className="admin-form-section__desc">
               Téléversez au moins une photo. La 2ᵉ s&apos;affiche au survol dans le catalogue.
@@ -291,13 +390,13 @@ export default function AdminProducts() {
 
         <section>
           <h2 className="admin-card__title">
-            {filtered.length} produit{filtered.length !== 1 ? 's' : ''} — {atelierMeta?.label}
+            {products.length} produit{products.length !== 1 ? 's' : ''} — Tous les produits
           </h2>
-          {filtered.length === 0 ? (
-            <p className="admin-empty">Aucun produit dans cet atelier.</p>
+          {products.length === 0 ? (
+            <p className="admin-empty">Aucun produit dans le catalogue.</p>
           ) : (
             <ul className="admin-list">
-              {filtered.map((p) => (
+              {products.map((p) => (
                 <li key={p._id} className="admin-list__item">
                   {p.images?.[0] && (
                     <img src={resolveMediaUrl(p.images[0])} alt="" className="admin-list__thumb admin-list__thumb--sm" />

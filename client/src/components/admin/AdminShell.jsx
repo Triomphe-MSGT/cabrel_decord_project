@@ -16,7 +16,7 @@ export default function AdminShell({ title, description, children, wide = false 
     <div className="admin-shell">
       <aside className={`admin-shell__sidebar${menuOpen ? ' admin-shell__sidebar--open' : ''}`}>
         <div className="admin-shell__sidebar-head">
-          <BrandLogo size="sm" linkTo="/admin/dashboard" />
+          <BrandLogo size="sm" linkTo="/cdm/dashboard" />
           <button
             type="button"
             className="admin-shell__close lg:hidden"
@@ -44,7 +44,7 @@ export default function AdminShell({ title, description, children, wide = false 
 
         <div className="admin-shell__sidebar-foot">
           {adminUser && (
-            <Link to="/admin/profil" className="admin-shell__user-link" onClick={() => setMenuOpen(false)}>
+            <Link to="/cdm/profil" className="admin-shell__user-link" onClick={() => setMenuOpen(false)}>
               <User size={15} />
               <span className="truncate">{adminUser.nom || adminUser.email}</span>
             </Link>
