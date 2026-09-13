@@ -5,7 +5,7 @@ export default function AnnouncementBar() {
     <div className="announcement-bar">
       <div className="announcement-bar-inner">
         <p className="announcement-bar-text">
-          Produits artisanaux — pièces uniques fabriquées localement.
+          Produits artisanaux pièces uniques fabriquées localement.
         </p>
         <Link to="/produits" className="announcement-bar-link">
           Découvrir la collection
