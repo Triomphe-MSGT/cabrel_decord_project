@@ -49,12 +49,20 @@ const connectDB = async () => {
       })
       .catch((err) => {
         cached.promise = null;
+        let userMessage;
         if (isVercel()) {
-          throw new Error(`MongoDB : ${err.message}`);
+          // In Vercel, throw a generic error for the user
+          userMessage = 'Erreur de connexion à la base de données';
+          // Log full error for debugging (server-side)
+          console.error('MongoDB connection error:', err);
+        } else {
+          // Local/dev: fallback to JSON and warn with technical detail
+          userMessage = `MongoDB indisponible (${err.message}), bascule sur db.json`;
+          console.warn(userMessage);
+          jsonMode = true;
+          return null;
         }
-        jsonMode = true;
-        console.warn(`MongoDB indisponible (${err.message}), bascule sur db.json`);
-        return null;
+        throw new Error(`MongoDB : ${userMessage}`);
       });
   }
 

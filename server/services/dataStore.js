@@ -19,6 +19,10 @@ const getSort = (sort) => {
   }
 };
 
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
 const buildMongoFilter = (query) => {
   const filter = {};
   if (query.disponible !== undefined) filter.disponible = query.disponible === 'true';
@@ -35,7 +39,9 @@ const buildMongoFilter = (query) => {
     if (query.prixMax) filter.prix.$lte = Number(query.prixMax);
   }
   if (query.q) {
-    const regex = new RegExp(query.q, 'i');
+    // Escape user input to prevent regex injection
+    const safeQuery = escapeRegExp(query.q);
+    const regex = new RegExp(safeQuery, 'i');
     filter.$or = [
       ...(filter.$or || []),
       { titre: regex },

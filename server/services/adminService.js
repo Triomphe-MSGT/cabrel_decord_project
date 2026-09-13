@@ -20,10 +20,15 @@ const ensureMongoAdmin = async () => {
   if (record) return record;
 
   const now = new Date();
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@cabreldecor.com';
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword) {
+    throw new Error('ADMIN_PASSWORD doit être défini dans les variables d\'environnement');
+  }
   record = await Admin.create({
     nom: 'Administrateur Cabrel',
-    email: process.env.ADMIN_EMAIL || 'admin@cabreldecor.com',
-    passwordHash: bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'admin123', 10),
+    email: adminEmail,
+    passwordHash: bcrypt.hashSync(adminPassword, 10),
     createdAt: now,
     updatedAt: now,
   });

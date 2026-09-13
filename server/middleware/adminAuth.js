@@ -7,8 +7,11 @@ const adminAuth = (req, res, next) => {
   }
 
   const token = authHeader.split(' ')[1];
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    return res.status(500).json({ message: 'Configuration du serveur manquante' });
+  }
   try {
-    const secret = process.env.JWT_SECRET || 'dev_secret_json_mode';
     const decoded = jwt.verify(token, secret);
     req.admin = decoded;
     next();
