@@ -2,7 +2,28 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
+  timeout: 15000, // 15 seconds timeout
 });
+
+// Add request interceptor to show loading state if needed
+api.interceptors.request.use((config) => {
+  // You could add loading indicators here if desired
+  return config;
+});
+
+// Add response interceptor to handle timeout errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.code === 'ERR_TIMEOUT') {
+      // Return a custom error for timeout
+      return Promise.reject(
+        new Error('La requête a expiré. Veuillez vérifier votre connexion et réessayer.')
+      );
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const setAuthToken = (token) => {
   if (token) {
@@ -64,6 +85,7 @@ export const uploadApi = {
     form.append('folder', folder);
     return api.post('/cdm/upload', form, {
       headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 60000, // 60 seconds timeout for uploads
     });
   },
 };

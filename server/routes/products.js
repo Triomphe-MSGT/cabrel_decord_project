@@ -37,6 +37,7 @@ router.post('/', adminAuth, async (req, res) => {
     const product = await products.create(req.body);
     res.status(201).json(product);
   } catch (err) {
+    console.error('Product creation error:', err);
     res.status(400).json({ message: err.message });
   }
 });

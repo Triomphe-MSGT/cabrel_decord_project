@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { productsApi } from '../../services/api';
 import { formatPrice } from '../../utils/formatPrice';
 import { resolveMediaUrl } from '../../utils/mediaUrl';
+    import { Loader2 } from 'lucide-react';
 import AdminShell from '../../components/admin/AdminShell';
 import ImageListEditor from '../../components/admin/ImageListEditor';
 import PageTransition from '../../components/layout/PageTransition';
@@ -41,19 +41,27 @@ const emptyProduct = () => ({
 });
 
 export default function AdminProducts() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [formRef, setFormRef] = useState(null);
+  const formRef = useRef(null);
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState(emptyProduct());
   const [editingId, setEditingId] = useState(null);
   const [images, setImages] = useState([]);
   const [saving, setSaving] = useState(false);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const [formError, setFormError] = useState(null);
-  const [formSuccess, setFormSuccess] = useState(null);
+  // Notification toast: {message, type: 'success'|'error'}
+  const [notification, setNotification] = useState(null);
 
   const load = () => {
+    setLoadingProducts(true);
     productsApi.getAll({ limit: 100 }).then(({ data }) => {
       setProducts(data.products || data);
+      setLoadingProducts(false);
+    }).catch((err) => {
+      setLoadingProducts(false);
+      // Optionally show a notification for loading errors
+      // For now, just silently handle to avoid spamming user with errors during background loads
+      console.warn('Failed to load products:', err.message);
     });
   };
 
@@ -85,10 +93,29 @@ export default function AdminProducts() {
     }
   }, [editingId, products]);
 
+  // Auto-hide notification after 4 seconds
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => setNotification(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
+
+  const showSuccess = (message) => {
+    setNotification({ message, type: 'success' });
+    // Clear form success/error if needed
+    setFormError(null);
+    // Optionally clear formSuccess if we were using it separately
+  };
+
+  const showError = (message) => {
+    setNotification({ message, type: 'error' });
+    setFormError(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError(null);
-    setFormSuccess(null);
 
     const formRefEl = formRef.current;
     if (formRefEl) {
@@ -110,6 +137,17 @@ export default function AdminProducts() {
       return;
     }
 
+    // Validate category selection
+    if (!form.categorie_mobilier && !form.categorie_art) {
+      setFormError('Veuillez sélectionner une catégorie pour le produit.');
+      return;
+    }
+
+    // Determine atelier based on selected category
+    let atelier = '';
+    if (form.categorie_mobilier) atelier = 'mobilier';
+    else if (form.categorie_art) atelier = 'art';
+
     const payload = {
       titre: form.titre.trim(),
       description: form.description.trim(),
@@ -118,26 +156,34 @@ export default function AdminProducts() {
       enVedette: form.enVedette,
       images,
       tags: form.tags || [],
-      categorie_mobilier: form.categorie_mobilier ?? '',
-      categorie_art: form.categorie_art ?? '',
-      matiere: form.matiere ?? '',
-      technique: form.technique ?? '',
-      dimensions: form.dimensions ?? '',
+      categorie_mobilier: form.categorie_mobilier === '' ? null : form.categorie_mobilier,
+      categorie_art: form.categorie_art === '' ? null : form.categorie_art,
+      matiere: form.matiere === '' ? null : form.matiere,
+      technique: form.technique === '' ? null : form.technique,
+      dimensions: form.dimensions === '' ? null : form.dimensions,
+      atelier,
     };
 
     setSaving(true);
     try {
       if (editingId) {
         await productsApi.update(editingId, payload);
-        setFormSuccess('Produit mis à jour.');
+        showSuccess('Produit mis à jour.');
       } else {
         await productsApi.create(payload);
-        setFormSuccess('Produit publié avec succès.');
+        showSuccess('Produit publié avec succès.');
       }
       resetForm();
       load();
     } catch (err) {
-      setFormError(err.response?.data?.message || 'Impossible de publier le produit. Réessayez.');
+      let msg = 'Impossible de publier le produit. Réessayez.';
+      if (err.response?.data?.message) {
+        msg = err.response.data.message;
+      } else if (err.message) {
+        // Handle network errors, timeouts, etc.
+        msg = err.message;
+      }
+      showError(msg);
     } finally {
       setSaving(false);
     }
@@ -159,9 +205,21 @@ export default function AdminProducts() {
 
   const handleDelete = async (id) => {
     if (!confirm('Supprimer ce produit ?')) return;
-    await productsApi.remove(id);
-    if (editingId === id) resetForm();
-    load();
+    try {
+      await productsApi.remove(id);
+      if (editingId === id) resetForm();
+      load();
+      showSuccess('Produit supprimé.');
+    } catch (err) {
+      let msg = 'Erreur lors de la suppression.';
+      if (err.response?.data?.message) {
+        msg = err.response.data.message;
+      } else if (err.message) {
+        // Handle network errors, timeouts, etc.
+        msg = err.message;
+      }
+      showError(msg);
+    }
   };
 
   const handleCategoryChange = (e) => {
@@ -202,7 +260,13 @@ export default function AdminProducts() {
           </p>
 
           {formError && <p className="admin-login__error mb-4">{formError}</p>}
-          {formSuccess && <p className="admin-toast mb-4">{formSuccess}</p>}
+
+          {/* Notification toast */}
+          {notification && (
+            <div className={`admin-toast admin-toast--${notification.type} mb-4`}>
+              {notification.message}
+            </div>
+          )}
 
           <fieldset className="admin-form-section">
             <legend className="admin-form-section__title">Informations générales</legend>
@@ -374,11 +438,16 @@ export default function AdminProducts() {
 
           <div className="flex flex-wrap gap-2 pt-2">
             <button type="submit" disabled={saving} className="admin-btn admin-btn--primary mt-0">
-              {saving
-                ? 'Publication…'
-                : editingId
-                  ? 'Enregistrer les modifications'
-                  : 'Publier le produit'}
+              {saving ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Publication…
+                </>
+              ) : editingId ? (
+                'Enregistrer les modifications'
+              ) : (
+                'Publier le produit'
+              )}
             </button>
             {editingId && (
               <button type="button" onClick={resetForm} className="admin-btn admin-btn--ghost mt-4">
@@ -389,10 +458,9 @@ export default function AdminProducts() {
         </form>
 
         <section>
-          <h2 className="admin-card__title">
-            {products.length} produit{products.length !== 1 ? 's' : ''} — Tous les produits
-          </h2>
-          {products.length === 0 ? (
+          {loadingProducts ? (
+            <p className="admin-empty">Chargement des produits…</p>
+          ) : products.length === 0 ? (
             <p className="admin-empty">Aucun produit dans le catalogue.</p>
           ) : (
             <ul className="admin-list">
