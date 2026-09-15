@@ -320,14 +320,14 @@ export default function AdminProducts() {
                   <option value="">— Choisir une catégorie —</option>
                   {/* Mobilier categories */}
                   {MOBILIER_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    <option key={`mobilier-${cat}`} value={cat}>
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}{cat === 'autre' ? ' (mobilier)' : ''}
                     </option>
                   ))}
                   {/* Art categories */}
                   {ART_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    <option key={`art-${cat}`} value={cat}>
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}{cat === 'autre' ? ' (art)' : ''}
                     </option>
                   ))}
                 </select>

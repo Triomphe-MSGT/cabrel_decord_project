@@ -196,6 +196,16 @@ const deleteComment = (id) => {
 
 const countPendingComments = () => load().comments.filter((c) => !c.valide).length;
 
+const findAllComments = () => {
+  const db = load();
+  return db.comments
+    .map((c) => ({
+      ...c,
+      produit: populateProduct(c.produit),
+    }))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+};
+
 const sortHeroSlides = (slides) =>
   [...slides].sort((a, b) => (a.ordre ?? 0) - (b.ordre ?? 0));
 

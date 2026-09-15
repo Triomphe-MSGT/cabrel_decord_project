@@ -26,6 +26,7 @@ main {
   --hero-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --hero-h: clamp(440px, 36vw, 500px);
   --hero-visual-mobile: clamp(280px, 58vw, 360px);
+  --font-family-sans: 'Inter', system-ui, sans-serif;
 
   /* Tokens palette Cabrel */
   --cabrel-wood-rgb: 139, 105, 20;
@@ -350,12 +351,16 @@ main {
 }
 
 .announcement-bar-text {
-  @apply text-cabrel-cream/90 text-xs sm:text-[13px] text-center sm:text-left tracking-wide;
+  @apply text-cabrel-cream/90 text-base sm:text-[16px] text-center;
+  font-family: var(--font-family-sans);
+  letter-spacing: -0.02em;
 }
 
 .announcement-bar-link {
-  @apply inline-flex items-center gap-1.5 text-cabrel-cream text-xs sm:text-[13px] font-semibold whitespace-nowrap
+  @apply inline-flex items-center gap-1.5 text-cabrel-cream text-base sm:text-[16px] font-medium whitespace-nowrap
          hover:text-cabrel-cream/80 transition-colors underline-offset-4 hover:underline;
+  font-family: var(--font-family-sans);
+  letter-spacing: -0.02em;
 }
 
 /* --- Sections home (ateliers, à la une) --- */
@@ -1599,8 +1604,32 @@ main {
 }
 
 .admin-toast {
-  @apply mb-5 text-sm px-4 py-3 rounded-xl bg-white;
-  border: 1px solid rgba(139, 105, 20, 0.15);
+  @apply mb-4 text-sm px-5 py-4 rounded-lg bg-white/90 backdrop-blur-sm;
+  border: 1px solid rgba(139, 105, 20, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 3px solid rgba(139, 105, 20, 0.4);
+  animation: toastSlideIn 0.3s ease-out;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.admin-toast-success {
+  @apply bg-green-50 border-green-200;
+  border-left-color: green-400;
+}
+
+.admin-toast-error {
+  @apply bg-red-50 border-red-200;
+  border-left-color: red-400;
 }
 
 .admin-card {

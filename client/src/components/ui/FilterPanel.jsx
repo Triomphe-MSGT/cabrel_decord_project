@@ -11,6 +11,8 @@ export default function FilterPanel({
   onApply,
 }) {
   const { categories } = ATELIER_CONFIG[atelier];
+  // Remove duplicate categories (e.g., 'autre' appears in both mobilier and art)
+  const uniqueCategories = Array.from(new Set(categories));
 
   return (
     <div className="filter-panel">
@@ -24,7 +26,7 @@ export default function FilterPanel({
           >
             Toutes
           </button>
-          {categories.map((c) => (
+          {uniqueCategories.map((c) => (
             <button
               key={c}
               type="button"

@@ -8,8 +8,7 @@ export default function AnnouncementBar() {
           Produits artisanaux pièces uniques fabriquées localement.
         </p>
         <Link to="/produits" className="announcement-bar-link">
-          Découvrir la collection
-          <span aria-hidden>→</span>
+          Découvrir la sélection
         </Link>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
 import { commentsApi } from '../services/api';
 import { formatPrice } from '../utils/formatPrice';
 import ImageGallery from '../components/ui/ImageGallery';
@@ -35,8 +36,9 @@ export default function ProductDetailContent({ product }) {
   return (
     <PageTransition>
       <div className="product-detail max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-10">
-        <Link to="/produits" className="text-sm text-cabrel-wood hover:underline mb-4 sm:mb-6 inline-block">
-          ← Retour aux produits
+        <Link to="/produits" className="flex items-center gap-2 text-sm text-cabrel-wood hover:text-cabrel-wood/80 mb-4 sm:mb-6">
+          <ChevronLeft size={18} />
+          Retour aux produits
         </Link>
         <div className="product-detail__layout">
           <ImageGallery images={product.images} title={product.titre} />
@@ -84,7 +86,7 @@ export default function ProductDetailContent({ product }) {
           <h2 className="font-serif text-xl mb-6">Commentaires</h2>
           <CommentList comments={comments} loading={commentsLoading} />
           <div className="mt-8">
-            <CommentForm produitId={product._id} />
+            <CommentForm produitId={product._id} onSubmitted={loadComments} />
           </div>
         </section>
       </div>

@@ -46,6 +46,7 @@ export const commentsApi = {
   getByProduct: (produitId) => api.get(`/comments/${produitId}`),
   create: (data) => api.post('/comments', data),
   getPending: () => api.get('/comments/pending'),
+  getAdmin: () => api.get('/comments/admin'),
   validate: (id) => api.put(`/comments/${id}/validate`),
   remove: (id) => api.delete(`/comments/${id}`),
 };

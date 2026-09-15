@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 import { useProducts } from '../../hooks/useProducts';
 import ProductCard from '../ui/ProductCard';
 
@@ -47,8 +48,9 @@ export default function AtelierPreview() {
             <ProductCard key={p._id} product={p} className="product-card hover:scale-[1.02] transition-transform duration-300" />
           ))}
         </div>
-        <Link to="/produits" className="atelier-preview-link">
-          Voir tous les produits →
+        <Link to="/produits" className="atelier-preview-link flex items-center gap-2 text-sm text-cabrel-wood hover:text-cabrel-wood/80">
+          Voir tous les produits
+          <ChevronRight size={18} />
         </Link>
       </div>
     </section>

@@ -125,7 +125,8 @@ const comments = {
 
   create: async (data) => {
     if (isJsonMode()) return jsonStore.createComment(data);
-    const doc = await Comment.create({ ...data, valide: false });
+    const { _id, ...rest } = data;
+    const doc = await Comment.create({ ...rest, _id: _id || newId('comment'), valide: false });
     return doc.toObject();
   },
 
@@ -137,6 +138,14 @@ const comments = {
   remove: async (id) => {
     if (isJsonMode()) return jsonStore.deleteComment(id);
     return Comment.findByIdAndDelete(id).lean();
+  },
+
+  findAll: async () => {
+    if (isJsonMode()) return jsonStore.findAllComments();
+    return Comment.find()
+      .populate('produit', 'titre atelier')
+      .sort({ createdAt: -1 })
+      .lean();
   },
 
   countPending: async () => {
