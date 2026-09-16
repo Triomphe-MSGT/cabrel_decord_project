@@ -26,7 +26,18 @@ export default function CommentForm({ produitId, onSubmitted }) {
       setNote('');
       onSubmitted?.();
     } catch (err) {
-      setError(err.response?.data?.message || 'Erreur lors de l\'envoi');
+      let errorMessage = 'Erreur lors de l\'envoi du commentaire';
+      if (err.response) {
+        // Server responded with error status
+        errorMessage += `: ${err.response.data?.message || err.response.statusText}`;
+      } else if (err.request) {
+        // Request made but no response received
+        errorMessage += ': Aucune réponse du serveur. Vérifiez votre connexion.';
+      } else {
+        // Error in setting up the request
+        errorMessage += `: ${err.message || 'Erreur inconnue'}`;
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

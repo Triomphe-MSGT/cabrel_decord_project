@@ -11,7 +11,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Add response interceptor to handle timeout errors
+// Add response interceptor to handle timeout and network errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -19,6 +19,12 @@ api.interceptors.response.use(
       // Return a custom error for timeout
       return Promise.reject(
         new Error('La requête a expiré. Veuillez vérifier votre connexion et réessayer.')
+      );
+    }
+    if (!error.response) {
+      // Network error or no response
+      return Promise.reject(
+        new Error('Impossible de se connecter au serveur. Vérifiez votre connexion.')
       );
     }
     return Promise.reject(error);

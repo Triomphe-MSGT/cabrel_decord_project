@@ -11,11 +11,28 @@ export default function AdminComments() {
 
   const load = () => {
     setLoading(true);
+    setMessage(null);
     setError(null);
     commentsApi.getAdmin()
-      .then(({ data }) => {
-        console.log('Fetched comments:', data); // Debug log
-        setComments(Array.isArray(data) ? data : []);
+      .then(response => {
+        // Log the full response for debugging
+        console.log('AdminComments: API response received:', response);
+        // Extract data from response (since interceptor returns full response object)
+        const data = response.data;
+        // Log the extracted data
+        console.log('AdminComments: Extracted data:', data);
+        console.log('AdminComments: Data type:', typeof data);
+        console.log('AdminComments: Is data array?', Array.isArray(data));
+        if (Array.isArray(data)) {
+          console.log('AdminComments: Data length:', data.length);
+          setComments(data);
+          setError(null); // Clear any previous error
+        } else {
+          // Unexpected response format - log for debugging but treat as empty
+          console.warn('Expected array of comments from API but received:', data);
+          setComments([]);
+          setError('Format de réponse inattendu du serveur. Veuillez contacter l\'administrateur si le problème persiste.');
+        }
         setLoading(false);
       })
       .catch(err => {
@@ -31,6 +48,7 @@ export default function AdminComments() {
           // Error in setting up the request
           errorMessage += `: ${err.message || 'Erreur inconnue'}`;
         }
+        setComments([]); // Clear comments on error
         setError(errorMessage);
         setLoading(false);
       });

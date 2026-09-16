@@ -14,6 +14,15 @@ router.get('/pending', adminAuth, async (req, res) => {
   }
 });
 
+router.get('/admin', adminAuth, async (req, res) => {
+  try {
+    const list = await comments.findAll();
+    res.json(list);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.get('/:produitId', async (req, res) => {
   try {
     const list = await comments.findByProduct(req.params.produitId);
@@ -23,14 +32,6 @@ router.get('/:produitId', async (req, res) => {
   }
 });
 
-router.get('/admin', adminAuth, async (req, res) => {
-  try {
-    const list = await comments.findAll();
-    res.json(list);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
 
 router.post(
   '/',

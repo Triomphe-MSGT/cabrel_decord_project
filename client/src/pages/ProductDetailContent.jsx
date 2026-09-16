@@ -12,13 +12,31 @@ import PageTransition from '../components/layout/PageTransition';
 export default function ProductDetailContent({ product }) {
   const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
+  const [commentError, setCommentError] = useState(null);
 
   const loadComments = () => {
     if (!product?._id) return;
     setCommentsLoading(true);
+    setCommentError(null);
     commentsApi
       .getByProduct(product._id)
-      .then(({ data }) => setComments(data))
+      .then(({ data }) => {
+        setComments(data);
+      })
+      .catch((err) => {
+        let errorMessage = 'Erreur lors du chargement des commentaires';
+        if (err.response) {
+          // Server responded with error status
+          errorMessage += `: ${err.response.data?.message || err.response.statusText}`;
+        } else if (err.request) {
+          // Request made but no response received
+          errorMessage += ': Aucune réponse du serveur. Vérifiez votre connexion.';
+        } else {
+          // Error in setting up the request
+          errorMessage += `: ${err.message || 'Erreur inconnue'}`;
+        }
+        setCommentError(errorMessage);
+      })
       .finally(() => setCommentsLoading(false));
   };
 
@@ -84,7 +102,24 @@ export default function ProductDetailContent({ product }) {
 
         <section className="mt-10 sm:mt-16 max-w-2xl">
           <h2 className="font-serif text-xl mb-6">Commentaires</h2>
-          <CommentList comments={comments} loading={commentsLoading} />
+          {commentError && (
+            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-600">{commentError}</p>
+              <button
+                onClick={loadComments}
+                className="mt-2 px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700"
+              >
+                Réessayer
+              </button>
+            </div>
+          )}
+          {commentsLoading && <p className="opacity-60">Chargement des commentaires...</p>}
+          {!commentsLoading && !commentError && comments.length === 0 && (
+            <p className="text-sm opacity-60">Aucun commentaire pour le moment.</p>
+          )}
+          {!commentsLoading && !commentError && comments.length > 0 && (
+            <CommentList comments={comments} loading={commentsLoading} />
+          )}
           <div className="mt-8">
             <CommentForm produitId={product._id} onSubmitted={loadComments} />
           </div>
